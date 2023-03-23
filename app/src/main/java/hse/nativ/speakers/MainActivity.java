@@ -13,5 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
         int a = 10;
         int mod = a % 3;// loh
+        System.out.println("Hello, world!");
     }
 }
