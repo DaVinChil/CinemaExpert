@@ -20,5 +20,6 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Hello, world!");
         System.out.println("Goodbye, ilya!"); //ashyfkjhas
 
+        System.out.println("Goodbye, ilya!");
     }
 }
