@@ -11,13 +11,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("Hello, world!");
-        System.out.println("Goodbye, ilya!");
-        System.out.println("Hello, world!");
-        System.out.println("Goodbye, ilya!");
-        System.out.println("Hello, world!");
-        System.out.println("Goodbye, ilya!");
-        System.out.println("Hello, world!");
-        System.out.println("Goodbye, ilya!");
+        int a = 10;
+        int mod = a % 3;// loh
     }
 }
