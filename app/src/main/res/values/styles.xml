@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="inter_extrabold_style">
+        <item name="fontFamily">@font/inter_extrabold</item>
+    </style>
+    <style name="inter_semibold_style">
+        <item name="fontFamily">@font/inter_semibold</item>
+    </style>
+</resources>
