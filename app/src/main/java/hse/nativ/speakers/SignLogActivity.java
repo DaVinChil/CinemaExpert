@@ -3,12 +3,16 @@ package hse.nativ.speakers;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextPaint;
+import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,6 +33,16 @@ public class SignLogActivity extends AppCompatActivity {
         findAll();
         setAppearingAnim();
         setGradientOnTitle();
+
+        setButtons();
+    }
+
+    protected void setButtons(){
+        loginBtn.setOnClickListener((v) -> {
+            Intent intent = new Intent(SignLogActivity.this, LogInActivity.class);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            startActivity(intent);
+        });
     }
 
     protected void findAll(){
