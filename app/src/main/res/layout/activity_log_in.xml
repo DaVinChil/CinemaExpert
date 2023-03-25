@@ -75,7 +75,7 @@
         android:drawableRight="@drawable/baseline_eye_24"
         android:drawablePadding="8dp"
         android:fontFamily="@font/inter_bold"
-        android:hint="E-mail"
+        android:hint="Password"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingVertical="10dp"
