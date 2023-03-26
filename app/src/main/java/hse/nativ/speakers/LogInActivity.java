@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
-// TODO: Social Media signup
-
 public class LogInActivity extends AppCompatActivity {
 
     private boolean passHiden = true;
@@ -39,6 +37,10 @@ public class LogInActivity extends AppCompatActivity {
     protected void setViews(){
         setPasswordEye();
         setBackArrow();
+        setSignUpBtn();
+        setLoginBtn();
+        setForgotPassBtn();
+        setSocialMediaSignup();
     }
 
     protected void setLoginBtn(){
@@ -47,6 +49,10 @@ public class LogInActivity extends AppCompatActivity {
 
     protected void setForgotPassBtn(){
         // TODO: Set Forgot password text pressing
+    }
+
+    protected void setSocialMediaSignup(){
+        // TODO: Set Social Media Signup
     }
 
     protected void setSignUpBtn(){
@@ -82,13 +88,13 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     protected void findAll(){
-        loginBtn = findViewById(R.id.log_in_button);
+        loginBtn = findViewById(R.id.main_sign_up_button);
         forgotPassBtn = findViewById(R.id.forgot_pass);
         signUpBtn = findViewById(R.id.sign_up);
         yandexSignup = findViewById(R.id.yandex_sign);
         googleSignup = findViewById(R.id.google_sign);
         vkSignup = findViewById(R.id.vk_sign);
-        passInput = findViewById(R.id.password_input);
+        passInput = findViewById(R.id.confirm_password_input);
         passEye = findViewById(R.id.pass_eye);
         backArrow = findViewById(R.id.back_arrow);
     }

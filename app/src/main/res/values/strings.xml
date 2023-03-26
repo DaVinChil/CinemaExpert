@@ -8,4 +8,12 @@
     <string name="email">E-mail</string>
     <string name="sign_in_to_continue">Sign in to continue</string>
     <string name="welcome">Welcome!</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="first_time">First time here?</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up_caps">SIGN UP</string>
+    <string name="sign_in_underlined"><u>Sign in</u></string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="user_name">User name</string>
 </resources>

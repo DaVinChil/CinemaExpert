@@ -3,7 +3,6 @@ package hse.nativ.speakers;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -11,8 +10,6 @@ import android.graphics.Shader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextPaint;
-import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -49,7 +46,7 @@ public class SignLogActivity extends AppCompatActivity {
         cinemaTtl = findViewById(R.id.cinema_text);
         expertTtl = findViewById(R.id.expert_text);
         loginBtn = findViewById(R.id.log_in_button);
-        signupBtn = findViewById(R.id.sign_up_button);
+        signupBtn = findViewById(R.id.main_sign_up_button);
     }
 
     protected void hideViews(View... views){
