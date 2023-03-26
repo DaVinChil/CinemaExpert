@@ -38,6 +38,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/log_in_button"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -54,6 +55,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/main_sign_up_button"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
