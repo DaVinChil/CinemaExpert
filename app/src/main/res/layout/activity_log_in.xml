@@ -26,15 +26,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="45dp"
             android:fontFamily="@font/inter_bold"
             android:letterSpacing="0.1"
             android:text="@string/welcome"
             android:textColor="@color/white"
             android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13999999" />
+            app:layout_constraintTop_toBottomOf="@+id/back_arrow" />
 
         <TextView
             android:id="@+id/subtitle_txt"
@@ -225,12 +224,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="45dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/inika_regular"
             android:text="@string/dont_have_an_account"
             android:textColor="#D9D9D9"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/google_sign" />
+            app:layout_constraintTop_toBottomOf="@+id/google_sign"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/sign_up"
