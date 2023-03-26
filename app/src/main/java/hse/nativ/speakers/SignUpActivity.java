@@ -128,7 +128,7 @@ public class SignUpActivity extends AppCompatActivity {
         backArrow = findViewById(R.id.back_arrow);
         emailInput = findViewById(R.id.email_input);
         userNameInput = findViewById(R.id.user_name_input);
-        confirmPassInput = findViewById(R.id.confirm_password_input);
+        confirmPassInput = findViewById(R.id.password_input);
         passInput = findViewById(R.id.password_input);
         signUpBtn = findViewById(R.id.main_sign_up_button);
         yandexSignup = findViewById(R.id.yandex_sign);

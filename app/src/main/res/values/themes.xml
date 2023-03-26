@@ -6,6 +6,7 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="android:windowBackground">@color/mainColor</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="android:windowActivityTransitions">true</item>
         <!-- Status bar color. -->
