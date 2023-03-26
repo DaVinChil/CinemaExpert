@@ -40,6 +40,11 @@ public class SignLogActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             startActivity(intent);
         });
+        signupBtn.setOnClickListener((v) -> {
+            Intent intent = new Intent(SignLogActivity.this, SignUpActivity.class);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            startActivity(intent);
+        });
     }
 
     protected void findAll(){
