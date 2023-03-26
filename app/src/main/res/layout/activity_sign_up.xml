@@ -209,10 +209,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="45dp"
             android:src="@drawable/grey_rectangle"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@id/main_sign_up_button"
-            app:layout_constraintVertical_bias="0.03" />
+            app:layout_constraintTop_toBottomOf="@id/main_sign_up_button" />
 
         <TextView
             android:id="@+id/textView4"

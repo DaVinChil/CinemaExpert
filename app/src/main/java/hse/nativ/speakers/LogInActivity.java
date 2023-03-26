@@ -94,7 +94,7 @@ public class LogInActivity extends AppCompatActivity {
         yandexSignup = findViewById(R.id.yandex_sign);
         googleSignup = findViewById(R.id.google_sign);
         vkSignup = findViewById(R.id.vk_sign);
-        passInput = findViewById(R.id.confirm_password_input);
+        passInput = findViewById(R.id.password_input);
         passEye = findViewById(R.id.pass_eye);
         backArrow = findViewById(R.id.back_arrow);
     }

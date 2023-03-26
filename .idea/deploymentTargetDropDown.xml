@@ -6,12 +6,21 @@
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
+<<<<<<< HEAD
             <type value="SERIAL_NUMBER" />
             <value value="BQL0220324001030" />
+=======
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\Ilya\.android\avd\Android_Virtual_Device.avd" />
+>>>>>>> 23ba86a2bfbd119eac23f9d615c52fecccf9dc38
           </Key>
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
+<<<<<<< HEAD
     <timeTargetWasSelectedWithDropDown value="2023-03-26T12:19:53.790196700Z" />
+=======
+    <timeTargetWasSelectedWithDropDown value="2023-03-26T11:48:11.214280100Z" />
+>>>>>>> 23ba86a2bfbd119eac23f9d615c52fecccf9dc38
   </component>
 </project>
