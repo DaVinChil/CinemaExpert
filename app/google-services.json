@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1043798070181",
+    "project_id": "cinema-expert-ai",
+    "storage_bucket": "cinema-expert-ai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043798070181:android:a6820fb6d0526bd5018e4c",
+        "android_client_info": {
+          "package_name": "hse.nativ.speakers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043798070181-ui9sc505k6m9jcajgr5bhgunp77vc6qt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU32zYBLxm88-PSDoNOVind39kGpAzwpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043798070181-ui9sc505k6m9jcajgr5bhgunp77vc6qt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
