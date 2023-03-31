@@ -59,6 +59,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@null"
         android:backgroundTint="#302B2B"
         android:paddingVertical="10dp"
         android:text="@string/sign_up_caps"
