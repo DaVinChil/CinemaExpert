@@ -25,7 +25,7 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="130dp"
             android:layout_gravity="bottom"
             app:srcCompat="@drawable/intro_image_fade" />
     </FrameLayout>
@@ -37,67 +37,55 @@
         android:background="@drawable/black_orange_gradient">
 
         <TextView
-            android:id="@+id/expert_text"
+            android:id="@+id/cinema_text"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/inter_extrabold"
-            android:text="EXPERT"
-            android:textSize="56sp"
-            android:transitionName="expert_trans"
+            android:letterSpacing="0.03"
+            android:text="CINEMA"
+            android:textSize="48sp"
+            android:transitionName="cinema_trans"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.65" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/get_started_button"
+            android:layout_width="172dp"
+            android:layout_height="47dp"
+            android:background="@drawable/yellow_orange_gradient"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:text="@string/get_started"
+            android:textAppearance="@style/inter_extrabold_style"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.120000005" />
-
-        <TextView
-            android:id="@+id/cinema_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="43dp"
-            android:fontFamily="@font/plexsans_extralight"
-            android:text="CINEMA"
-            android:textColor="#FFC700"
-            android:textSize="32sp"
-            android:transitionName="cinema_trans"
-            app:layout_constraintBottom_toBottomOf="@+id/expert_text"
-            app:layout_constraintEnd_toEndOf="@+id/expert_text"
-            app:layout_constraintStart_toStartOf="@+id/expert_text" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/get_started_button"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/yellow_orange_gradient"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:text="@string/get_started"
-            android:textAppearance="@style/inter_extrabold_style"
-            android:textColor="#1C1C1C"
-            android:textSize="20sp"
-            app:backgroundTint="@null"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expert_text"
-            app:layout_constraintVertical_bias="0.32" />
+            app:layout_constraintVertical_bias="0.7" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="338dp"
-            android:layout_height="35dp"
+            android:layout_width="223dp"
+            android:layout_height="122dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="40dp"
-            android:fontFamily="@font/inter_regular"
+            android:fontFamily="@font/inter_light"
             android:letterSpacing="0.07"
             android:text="@string/intro_sentence"
-            android:textAlignment="textEnd"
-            android:textColor="#A0FF9D42"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAlignment="center"
+            android:textColor="#FF9D42"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/get_started_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.39" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

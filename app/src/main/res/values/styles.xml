@@ -2,7 +2,7 @@
 <resources>
     <style name="inter_extrabold_style">
         <item name="fontFamily">@font/inter_extrabold</item>
-        <item name="android:letterSpacing">0.1</item>
+        <item name="android:letterSpacing">0.02</item>
     </style>
     <style name="inter_semibold_style">
         <item name="fontFamily">@font/inter_semibold</item>

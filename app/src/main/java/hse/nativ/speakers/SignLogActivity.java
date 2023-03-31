@@ -19,7 +19,6 @@ import com.google.android.material.button.MaterialButton;
 public class SignLogActivity extends AppCompatActivity {
 
     private TextView cinemaTtl;
-    private TextView expertTtl;
     private MaterialButton getStartedBtn;
 
     @Override
@@ -36,27 +35,26 @@ public class SignLogActivity extends AppCompatActivity {
     protected void setButtons(){
         getStartedBtn.setOnClickListener((v) -> {
             Intent intent = new Intent(SignLogActivity.this, LogInActivity.class);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             startActivity(intent);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         });
     }
 
     protected void findAll(){
         cinemaTtl = findViewById(R.id.cinema_text);
-        expertTtl = findViewById(R.id.expert_text);
         getStartedBtn = findViewById(R.id.get_started_button);
     }
 
     protected void setGradientOnTitle(){
-        TextPaint paint = expertTtl.getPaint();
-        float width = paint.measureText("EXPERT");
+        TextPaint paint = cinemaTtl.getPaint();
+        float width = paint.measureText("CINEMA");
 
-        Shader textShader = new LinearGradient(0, 0, 0, expertTtl.getTextSize(),
+        Shader textShader = new LinearGradient(0, 0, width, cinemaTtl.getTextSize(),
                 new int[]{
-                        Color.parseColor("#CB0000"),
-                        Color.parseColor("#900000")
+                        Color.parseColor("#F91D00"),
+                        Color.parseColor("#FEB700")
                 }, null, Shader.TileMode.CLAMP);
-        expertTtl.getPaint().setShader(textShader);
-        expertTtl.setShadowLayer(1, 0, 0, Color.BLACK);
+        cinemaTtl.getPaint().setShader(textShader);
+        cinemaTtl.setShadowLayer(1, 0, 0, Color.BLACK);
     }
 }
