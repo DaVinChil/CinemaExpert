@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
@@ -13,9 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.FirstPartyScopes;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -39,15 +49,23 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean passHiden = true;
     private boolean confPassHiden = true;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        setFirebase();
+
         findAll();
         setViews();
+    }
+
+    protected void setFirebase() {
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
     }
 
     protected void setViews() {
@@ -73,26 +91,10 @@ public class SignUpActivity extends AppCompatActivity {
         passEye.setOnClickListener(v -> {
             if (passHiden) {
                 passHiden = false;
-                passEye.setImageResource(R.drawable.password_eye_crossed);
-
-                if (passInput.hasFocus()) {
-                    int pos = passInput.getText().length();
-                    passInput.setTransformationMethod(null);
-                    passInput.setSelection(pos);
-                } else {
-                    passInput.setTransformationMethod(null);
-                }
+                showPassword(passEye, passInput);
             } else {
                 passHiden = true;
-                passEye.setImageResource(R.drawable.password_eye);
-
-                if (passInput.hasFocus()) {
-                    int pos = passInput.getText().length();
-                    passInput.setTransformationMethod(new PasswordTransformationMethod());
-                    passInput.setSelection(pos);
-                } else {
-                    passInput.setTransformationMethod(new PasswordTransformationMethod());
-                }
+                hidePassword(passEye, passInput);
             }
         });
     }
@@ -101,28 +103,36 @@ public class SignUpActivity extends AppCompatActivity {
         confPassEye.setOnClickListener(v -> {
             if (confPassHiden) {
                 confPassHiden = false;
-                confPassEye.setImageResource(R.drawable.password_eye_crossed);
-
-                if (passInput.hasFocus()) {
-                    int pos = confirmPassInput.getText().length();
-                    confirmPassInput.setTransformationMethod(null);
-                    confirmPassInput.setSelection(pos);
-                } else {
-                    confirmPassInput.setTransformationMethod(null);
-                }
+                showPassword(confPassEye, confirmPassInput);
             } else {
                 confPassHiden = true;
-                confPassEye.setImageResource(R.drawable.password_eye);
-
-                if (confirmPassInput.hasFocus()) {
-                    int pos = confirmPassInput.getText().length();
-                    confirmPassInput.setTransformationMethod(new PasswordTransformationMethod());
-                    confirmPassInput.setSelection(pos);
-                } else {
-                    confirmPassInput.setTransformationMethod(new PasswordTransformationMethod());
-                }
+                hidePassword(confPassEye, confirmPassInput);
             }
         });
+    }
+
+    protected void hidePassword(ImageView eye, EditText input){
+        eye.setImageResource(R.drawable.password_eye);
+
+        if (input.hasFocus()) {
+            int pos = input.getText().length();
+            input.setTransformationMethod(new PasswordTransformationMethod());
+            input.setSelection(pos);
+        } else {
+            input.setTransformationMethod(new PasswordTransformationMethod());
+        }
+    }
+
+    protected void showPassword(ImageView eye, EditText input){
+        eye.setImageResource(R.drawable.password_eye_crossed);
+
+        if (input.hasFocus()) {
+            int pos = input.getText().length();
+            input.setTransformationMethod(null);
+            input.setSelection(pos);
+        } else {
+            input.setTransformationMethod(null);
+        }
     }
 
     protected void setSignInBtn() {
@@ -133,120 +143,123 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    protected String getUserNameAndVerify() {
+        String userName = String.valueOf(userNameInput.getText());
+        if (TextUtils.isEmpty(userName)) {
+            Toast.makeText(SignUpActivity.this, "User name can not be empty.", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        return userName.replaceAll("\\s", "");
+    }
+
+    protected String getEmailAndVerify() {
+        String userEmail = String.valueOf(emailInput.getText());
+        if (TextUtils.isEmpty(userEmail)) {
+            Toast.makeText(SignUpActivity.this, "Email can not be empty.", Toast.LENGTH_SHORT).show();
+            return null;
+        } else {
+            userEmail = userEmail.replaceAll("\\s", "");
+            if (!FireStoreTools.isCorrectEmailInput(userEmail)) {
+                Toast.makeText(this, "Email can not be empty.", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+        }
+
+        return userEmail;
+    }
+
+    protected String getPassAndVerifyAndCompare() {
+        String pass = String.valueOf(passInput.getText());
+        if (TextUtils.isEmpty(pass)) {
+            Toast.makeText(SignUpActivity.this, "Password can not be empty.", Toast.LENGTH_SHORT).show();
+            return null;
+        } else {
+            pass = pass.replaceAll("\\s", "");
+
+            if (!verifyPassword(pass)) {
+                System.out.println(pass);
+                Toast.makeText(this, "Password too weak", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+
+            String confPass = getConfirmPassAndVerify();
+            if (confPass == null) {
+                return null;
+            }
+
+            if (!pass.equals(confPass)) {
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+        }
+
+        return pass;
+    }
+
+    protected String getConfirmPassAndVerify() {
+        String confPass = String.valueOf(confirmPassInput.getText());
+        if (TextUtils.isEmpty(confPass)) {
+            Toast.makeText(SignUpActivity.this, "Confirmation password can not be empty.", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        return confPass.replaceAll("\\s", "");
+    }
+
+    protected boolean verifyPassword(String pass) {
+        if (pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(.{8,})")) {
+            return true; // strong
+        } else if (pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(.{8,})")) {
+            return true; // medium
+        }
+
+        return false;
+    }
+
     protected void setSignUpBtn() {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Thread(() -> {
-                    String userName = null;
-                    String userEmail = null;
-                    String pass = null;
-                    String confPass = null;
+                new Handler().post(() -> {
+                    String userName = getUserNameAndVerify();
+                    String userEmail = getEmailAndVerify();
+                    String pass = getPassAndVerifyAndCompare();
+                    if (userName == null || userEmail == null || pass == null) { return; }
 
-                    if (isEmptyInput("User name", userNameInput)) {
-                        return;
-                    } else {
-                        userName = userNameInput.getText().toString();
-                    }
-
-                    if (isEmptyInput("Email", emailInput)) {
-                        return;
-                    } else {
-                        userEmail = emailInput.getText().toString();
-                        if (!FireStoreTools.isCorrectEmailInput(userEmail)) {
-                            Toast.makeText(SignUpActivity.this, "Wrong email input", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-
-                    if (isEmptyInput("Password", passInput)) {
-                        return;
-                    } else {
-                        pass = passInput.getText().toString();
-                    }
-
-                    if (confirmPassInput.getText() == null || confirmPassInput.getText().length() == 0) {
-                        Toast.makeText(SignUpActivity.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
-                        return;
-                    } else {
-                        confPass = confirmPassInput.getText().toString();
-                        if (!pass.equals(confPass)) {
-                            Toast.makeText(SignUpActivity.this, "Passwords don't match", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-                    
-                    final boolean[] isAlreadyExist = {false, false};
-
-                    db.collection(FireStoreTools.USERS_COLLECTION).document(userEmail).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    if(documentSnapshot.exists()){
-                                        Toast.makeText(SignUpActivity.this, "Account with this email already exists", Toast.LENGTH_SHORT).show();
-                                        isAlreadyExist[0] = true;
-                                    }
-                                    isAlreadyExist[1] = true;
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    isAlreadyExist[0] = false;
-                                    isAlreadyExist[1] = true;
-                                }
-                            });
-
-                    while (!isAlreadyExist[1]){
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            Toast.makeText(SignUpActivity.this, "Interruption occurred", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-
-                    if(isAlreadyExist[0]){
-                        return;
-                    }
-
-                    Map<String, String> newUser = new HashMap<>();
-                    newUser.put(FireStoreTools.USER_NAME_TAG, userName);
-                    newUser.put(FireStoreTools.USER_EMAIL_TAG, userEmail);
-                    newUser.put(FireStoreTools.USER_PASSWORD_TAG, pass);
-
-                    String finalUserName = userName.replaceAll("\\s", "");
-                    String finalUserEmail = userEmail.replaceAll("\\s", "");
-                    String finalPass = pass.replaceAll("\\s", "");
-                    db.collection(FireStoreTools.USERS_COLLECTION).document(userEmail).set(newUser).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    CurrentUser.setUserPassword(finalPass);
-                                    CurrentUser.setUserEmail(finalUserEmail);
-                                    CurrentUser.setUserName(finalUserName);
-
-                                    Toast.makeText(SignUpActivity.this, "Welcome, " + finalUserName, Toast.LENGTH_SHORT).show();
-                                    // TODO: Send intent to main page
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(SignUpActivity.this, "Cannot create an account", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                }).start();
+                    createAccount(userEmail, pass, userName);
+                });
             }
         });
-
     }
 
-    protected boolean isEmptyInput(String toastName, EditText input) {
-        if (input.getText() == null || input.getText().length() == 0) {
-            Toast.makeText(this, toastName + " cannot be empty.", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+    protected void createAccount(String userEmail, String pass, String userName){
+        mAuth.createUserWithEmailAndPassword(userEmail, pass)
+                .addOnCompleteListener(task -> {
+                    onCompleteCreatingAccount(task, userName);
+                })
+                .addOnFailureListener(e -> {
+                    onFailureCreatingAccount(e);
+                });
+    }
 
-        return false;
+    protected void onCompleteCreatingAccount(Task<AuthResult> task, String userName){
+        if (task.isSuccessful()) {
+            task.getResult().getUser().updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(userName).build());
+            Toast.makeText(SignUpActivity.this, "Welcome, " + userName + ".", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected void onFailureCreatingAccount(Exception e){
+        if(e instanceof FirebaseAuthWeakPasswordException){
+            Toast.makeText(SignUpActivity.this, "Password too weak", Toast.LENGTH_SHORT).show();
+        } else if(e instanceof FirebaseAuthInvalidCredentialsException){
+            Toast.makeText(SignUpActivity.this, "Wrong email", Toast.LENGTH_SHORT).show();
+        } else if(e instanceof FirebaseAuthUserCollisionException){
+            Toast.makeText(SignUpActivity.this, "Account with that email already exists.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     protected void findAll() {

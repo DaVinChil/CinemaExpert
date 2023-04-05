@@ -13,16 +13,25 @@ import android.text.TextPaint;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+// TODO: Delete 33 line, when home page would be created
 
 public class SignLogActivity extends AppCompatActivity {
 
     private TextView cinemaTtl;
     private MaterialButton getStartedBtn;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        checkForAlreadyLogIn();
+        FirebaseAuth.getInstance().signOut();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_log);
 
@@ -32,9 +41,20 @@ public class SignLogActivity extends AppCompatActivity {
         setButtons();
     }
 
+    protected void checkForAlreadyLogIn(){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            Toast.makeText(this, "Welcome, " + user.getDisplayName() + ".", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SignLogActivity.this, LogInActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        }
+    }
+
     protected void setButtons(){
         getStartedBtn.setOnClickListener((v) -> {
-            Intent intent = new Intent(SignLogActivity.this, LogInActivity.class);
+            Intent intent = new Intent(SignLogActivity.this, SignUpActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         });
