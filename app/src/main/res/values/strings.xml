@@ -16,4 +16,6 @@
     <string name="sign_in_underlined"><u>Sign in</u></string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="user_name">User name</string>
+    <string name="get_started">Get Started</string>
+    <string name="intro_sentence">Sit back, relax, and enjoy the magic of \n\n\n\n from wherever you are.</string>
 </resources>

@@ -11,6 +11,9 @@
         <item name="android:windowActivityTransitions">true</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#302B2B</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
         <!-- Customize your theme here. -->
 
     </style>
