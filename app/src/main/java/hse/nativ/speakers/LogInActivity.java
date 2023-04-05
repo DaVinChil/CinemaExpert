@@ -5,15 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,15 +36,20 @@ public class LogInActivity extends AppCompatActivity {
     private ImageView yandexSignup;
     private ImageView googleSignup;
     private ImageView vkSignup;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        setFirebase();
         findAll();
         setViews();
+    }
+
+    protected void setFirebase(){
+        mAuth = FirebaseAuth.getInstance();
     }
 
     protected void setViews() {
@@ -53,56 +63,56 @@ public class LogInActivity extends AppCompatActivity {
 
     protected void setLoginBtn() {
         loginBtn.setOnClickListener(v -> {
-            String userEmail = null;
-            String userPass = null;
+            String userEmail = getInputEmailAndVerify();
+            String userPass = getPassInputAndVerify();
 
-            if (emailInput.getText() == null || emailInput.getText().length() == 0) {
-                Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_SHORT).show();
-                return;
-            } else {
-                userEmail = emailInput.getText().toString().replaceAll("\\s", "");;
-                if (!FireStoreTools.isCorrectEmailInput(userEmail)) {
-                    Toast.makeText(this, "Wrong email Input", Toast.LENGTH_SHORT).show();
-                }
-            }
+            if(userEmail == null || userPass == null){ return; }
 
-            if (passInput.getText() == null || passInput.getText().length() == 0) {
-                Toast.makeText(this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            userPass = passInput.getText().toString();
-
-            String finalUserPass = userPass.replaceAll("\\s", "");
-            db.collection(FireStoreTools.USERS_COLLECTION).document(userEmail).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (!documentSnapshot.exists()) {
-                                Toast.makeText(LogInActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-
-                            if(!documentSnapshot.getString(FireStoreTools.USER_PASSWORD_TAG).equals(finalUserPass)){
-                                Toast.makeText(LogInActivity.this, "Email or password mismatch", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-
-                            CurrentUser.setUserEmail(documentSnapshot.getString(FireStoreTools.USER_EMAIL_TAG));
-                            CurrentUser.setUserIdDocument(documentSnapshot.getId());
-                            CurrentUser.setUserName(documentSnapshot.getString(FireStoreTools.USER_NAME_TAG));
-                            CurrentUser.setUserPassword(documentSnapshot.getString(FireStoreTools.USER_PASSWORD_TAG));
-
-                            Toast.makeText(LogInActivity.this, "Welcome, " + CurrentUser.getUserName() + "!", Toast.LENGTH_SHORT).show();
-                            // TODO: SEND INTENT TO MAIN PAGE
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(LogInActivity.this, "Could not find user", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            performLogIn(userEmail, userPass);
         });
+    }
+
+    protected String getInputEmailAndVerify(){
+        String userEmail = String.valueOf(emailInput.getText());
+
+        if (TextUtils.isEmpty(userEmail)) {
+            Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        userEmail = userEmail.replaceAll("\\s", "");
+
+        return userEmail;
+    }
+
+    protected String getPassInputAndVerify(){
+        String userPass = String.valueOf(passInput.getText());
+
+        if (TextUtils.isEmpty(userPass)) {
+            Toast.makeText(this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        userPass = userPass.replaceAll("\\s", "");
+
+        return userPass;
+    }
+
+    protected void performLogIn(String userEmail, String userPass){
+        mAuth.signInWithEmailAndPassword(userEmail, userPass)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(LogInActivity.this, "Welcome, " + task.getResult().getUser().getDisplayName(),
+                                    Toast.LENGTH_SHORT);
+                            // TODO: SEND INTENT TO MAIN PAGE
+                        } else {
+                            Toast.makeText(LogInActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT);
+                        }
+                    }
+                });
     }
 
     protected void setForgotPassBtn() {
@@ -147,14 +157,18 @@ public class LogInActivity extends AppCompatActivity {
 
     protected void findAll() {
         loginBtn = findViewById(R.id.main_sign_up_button);
-        forgotPassBtn = findViewById(R.id.forgot_pass);
         signUpBtn = findViewById(R.id.sign_up);
+        forgotPassBtn = findViewById(R.id.forgot_pass);
+
+        passInput = findViewById(R.id.password_input);
+        emailInput = findViewById(R.id.email_input);
+
+        passEye = findViewById(R.id.pass_eye);
+
         yandexSignup = findViewById(R.id.yandex_sign);
         googleSignup = findViewById(R.id.google_sign);
         vkSignup = findViewById(R.id.vk_sign);
-        passInput = findViewById(R.id.password_input);
-        emailInput = findViewById(R.id.email_input);
-        passEye = findViewById(R.id.pass_eye);
+
         backArrow = findViewById(R.id.back_arrow);
     }
 
