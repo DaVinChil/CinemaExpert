@@ -23,12 +23,12 @@
 
         <TextView
             android:id="@+id/movie_grade"
-            android:layout_width="35dp"
-            android:layout_height="25dp"
+            android:layout_width="27dp"
+            android:layout_height="20dp"
             android:gravity="center"
             android:textColor="@color/white"
-            android:translationY="10dp"
-            android:textSize="13sp"
+            android:translationY="5dp"
+            android:textSize="10sp"
             android:fontFamily="@font/inter_extrabold"/>
 
     </FrameLayout>
