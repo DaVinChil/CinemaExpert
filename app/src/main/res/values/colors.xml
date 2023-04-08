@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="mainColor">#302B2B</color>
+    <color name="gradeMovieColorGreen">#39AC23</color>
+    <color name="gradeMovieColorGray">#535253</color>
 </resources>

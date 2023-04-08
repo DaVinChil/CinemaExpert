@@ -29,8 +29,8 @@ public class SignLogActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        checkForAlreadyLogIn();
-        FirebaseAuth.getInstance().signOut();
+        checkForAlreadyLogIn();
+        //FirebaseAuth.getInstance().signOut();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_log);
@@ -46,7 +46,7 @@ public class SignLogActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null){
             Toast.makeText(this, "Welcome, " + user.getDisplayName() + ".", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SignLogActivity.this, LogInActivity.class);
+            Intent intent = new Intent(SignLogActivity.this, MainScreenActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }

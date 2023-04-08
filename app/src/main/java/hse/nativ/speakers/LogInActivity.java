@@ -69,6 +69,8 @@ public class LogInActivity extends AppCompatActivity {
             if(userEmail == null || userPass == null){ return; }
 
             performLogIn(userEmail, userPass);
+            Intent mainScreen = new Intent(this, MainScreenActivity.class);
+            startActivity(mainScreen);
         });
     }
 
