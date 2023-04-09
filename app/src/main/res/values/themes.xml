@@ -12,9 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#302B2B</item>
 
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:navigationBarColor">@color/mainColor</item>
 
     </style>
 </resources>

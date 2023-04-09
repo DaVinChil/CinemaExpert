@@ -27,7 +27,7 @@ public class MoviesFragment extends Fragment {
 
         MoviesListFragment moviesList2 = new MoviesListFragment();
         setFragmentData(moviesList2, "Top 200");
-        ft.add(R.id.movies_list_2, moviesList1);
+        ft.add(R.id.movies_list_2, moviesList2);
 
         ft.commit();
         return linearLayout;

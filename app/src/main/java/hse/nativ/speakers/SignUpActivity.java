@@ -228,6 +228,9 @@ public class SignUpActivity extends AppCompatActivity {
                     if (userName == null || userEmail == null || pass == null) { return; }
 
                     createAccount(userEmail, pass, userName);
+                    Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
+                    startActivity(intent);
+                    finish();
                 });
             }
         });

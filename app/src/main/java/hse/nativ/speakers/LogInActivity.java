@@ -71,6 +71,7 @@ public class LogInActivity extends AppCompatActivity {
             performLogIn(userEmail, userPass);
             Intent mainScreen = new Intent(this, MainScreenActivity.class);
             startActivity(mainScreen);
+            finish();
         });
     }
 
