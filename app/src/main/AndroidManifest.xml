@@ -14,7 +14,7 @@
         <activity
             android:name=".MainScreenActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />

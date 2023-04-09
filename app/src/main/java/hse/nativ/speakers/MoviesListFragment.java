@@ -1,6 +1,8 @@
 package hse.nativ.speakers;
 
 import android.os.Bundle;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,18 +33,20 @@ public class MoviesListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LinearLayout linearLayout = (LinearLayout) inflater.inflate(
+        ConstraintLayout linearLayout = (ConstraintLayout) inflater.inflate(
                 R.layout.fragment_movies_list,
                 container, false);
 
-        TextView nameCategory = (TextView) linearLayout.findViewById(R.id.movie_category);
+        TextView nameCategory = linearLayout.findViewById(R.id.movie_category);
         nameCategory.setText(moviesCategory);
 
-        RecyclerView movieRecycler = (RecyclerView) linearLayout.findViewById(R.id.movie_recycler);
         MoviesAdapter moviesAdapter = new MoviesAdapter(moviesNames, imagesID, moviesGrades, moviesGenres);
+
+        RecyclerView movieRecycler = linearLayout.findViewById(R.id.movie_recycler);
         movieRecycler.setAdapter(moviesAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         movieRecycler.setLayoutManager(layoutManager);
+
         return linearLayout;
     }
 

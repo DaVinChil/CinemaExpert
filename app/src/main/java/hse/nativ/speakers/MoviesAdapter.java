@@ -2,6 +2,7 @@ package hse.nativ.speakers;
 
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,21 +47,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         LinearLayout movieView = holder.linearLayout;
 
-        ImageView imageMovie = (ImageView) movieView.findViewById(R.id.movie_picture);
+        ImageView imageMovie = movieView.findViewById(R.id.movie_picture);
         Drawable drawable = ContextCompat.getDrawable(movieView.getContext(), imagesID[position]);
         imageMovie.setImageDrawable(drawable);
 
-        TextView movieName = (TextView) movieView.findViewById(R.id.movie_name);
+        TextView movieName = movieView.findViewById(R.id.movie_name);
         movieName.setText(names[position]);
 
-        TextView movieGrade = (TextView) movieView.findViewById(R.id.movie_grade);
+        TextView movieGrade = movieView.findViewById(R.id.movie_grade);
         movieGrade.setText(grades[position]);
         setGradeBackground(movieGrade, grades[position]);
 
-        TextView movieGenre = (TextView) movieView.findViewById(R.id.movie_genre);
+        TextView movieGenre = movieView.findViewById(R.id.movie_genre);
         movieGenre.setText(genres[position]);
     }
 
@@ -68,8 +69,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         if (Double.parseDouble(grade) >= 7) {
             movieGrade.setBackgroundResource(R.drawable.grade_movie_background_green);
         }
-        else {
+        else if (Double.parseDouble(grade) >= 5){
             movieGrade.setBackgroundResource(R.drawable.grade_movie_background_gray);
+        }
+        else {
+            movieGrade.setBackgroundResource(R.drawable.grade_movie_background_red);
         }
     }
 }

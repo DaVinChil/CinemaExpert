@@ -10,4 +10,6 @@
     <color name="mainColor">#302B2B</color>
     <color name="gradeMovieColorGreen">#39AC23</color>
     <color name="gradeMovieColorGray">#535253</color>
+    <color name="gradeMovieColorRed">#F40E0E</color>
+    <color name="orange">#FF4A11</color>
 </resources>
