@@ -1,14 +1,14 @@
 package hse.nativ.speakers;
 
 import android.os.Bundle;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,15 +19,25 @@ public class MoviesListFragment extends Fragment {
     private String[] moviesGrades;
     private int[] imagesID;
     private String moviesCategory;
+    private FragmentActivity context;
 
-    public MoviesListFragment() {}
-    public MoviesListFragment(String[] moviesNames, String[] moviesGenres, String[] moviesGrades,
-                              int[] imagesID, String moviesCategory) {
-        this.moviesGrades = moviesGrades;
-        this.moviesNames = moviesNames;
-        this.moviesGenres = moviesGenres;
-        this.imagesID = imagesID;
+    public MoviesListFragment() {
+    }
+
+    public MoviesListFragment(FragmentActivity context, Movie[] movies, String moviesCategory) {
+        this.context = context;
         this.moviesCategory = moviesCategory;
+
+        moviesNames = new String[movies.length];
+        moviesGrades = new String[movies.length];
+        imagesID = new int[movies.length];
+        moviesGenres = new String[movies.length];
+        for (int i = 0; i < movies.length; ++i) {
+            moviesNames[i] = movies[i].getName();
+            moviesGenres[i] = movies[i].getGenre();
+            moviesGrades[i] = movies[i].getGrade();
+            imagesID[i] = movies[i].getImageResourceID();
+        }
     }
 
     @Override
@@ -50,23 +60,5 @@ public class MoviesListFragment extends Fragment {
         return linearLayout;
     }
 
-    public void setMoviesNames(String[] moviesNames) {
-        this.moviesNames = moviesNames;
-    }
 
-    public void setMoviesGenres(String[] moviesGenres) {
-        this.moviesGenres = moviesGenres;
-    }
-
-    public void setImagesID(int[] imagesID) {
-        this.imagesID = imagesID;
-    }
-
-    public void setMoviesCategory(String moviesCategory) {
-        this.moviesCategory = moviesCategory;
-    }
-
-    public void setMoviesGrades(String[] moviesGrades) {
-        this.moviesGrades = moviesGrades;
-    }
 }
