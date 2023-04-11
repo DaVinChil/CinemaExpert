@@ -8,8 +8,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/movie_picture"
@@ -19,7 +18,7 @@
             android:adjustViewBounds="true"
             android:maxHeight="300dp"
             android:scaleType="centerCrop"
-            android:translationX="10dp"/>
+            android:translationX="7dp"/>
 
         <TextView
             android:id="@+id/movie_grade"
