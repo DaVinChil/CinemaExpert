@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +44,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout movieView = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_movie, parent, false);
-        return new ViewHolder(movieView);
+        ViewHolder holder = new ViewHolder(movieView);
+        return holder;
     }
 
     @Override
@@ -63,16 +65,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         TextView movieGenre = movieView.findViewById(R.id.movie_genre);
         movieGenre.setText(genres[position]);
+
+        if (position >= getItemCount() - 1) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(6, 6, 60, 6);
+            holder.itemView.setLayoutParams(params);
+        }
     }
 
     private void setGradeBackground(TextView movieGrade, String grade) {
         if (Double.parseDouble(grade) >= 7) {
             movieGrade.setBackgroundResource(R.drawable.grade_movie_background_green);
-        }
-        else if (Double.parseDouble(grade) >= 5){
+        } else if (Double.parseDouble(grade) >= 5) {
             movieGrade.setBackgroundResource(R.drawable.grade_movie_background_gray);
-        }
-        else {
+        } else {
             movieGrade.setBackgroundResource(R.drawable.grade_movie_background_red);
         }
     }
