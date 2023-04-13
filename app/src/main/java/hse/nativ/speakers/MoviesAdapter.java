@@ -1,6 +1,8 @@
 package hse.nativ.speakers;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +29,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     private int[] imagesID;
     private String[] grades;
     private String[] genres;
+    private Context mContext;
 
-    public MoviesAdapter(String[] names, int[] imagesID, String[] grades, String[] genres) {
+    public MoviesAdapter(Context context, String[] names, int[] imagesID, String[] grades, String[] genres) {
+        mContext = context;
         this.names = names;
         this.imagesID = imagesID;
         this.grades = grades;
@@ -68,7 +72,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         if (position >= getItemCount() - 1) {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(6, 6, 60, 6);
+            float margin = 150 / ((float) mContext.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+            params.setMargins(6, 6, (int) margin, 6);
             holder.itemView.setLayoutParams(params);
         }
     }

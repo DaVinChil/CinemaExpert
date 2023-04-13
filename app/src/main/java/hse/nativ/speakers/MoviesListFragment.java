@@ -52,7 +52,7 @@ public class MoviesListFragment extends Fragment {
         TextView nameCategory = linearLayout.findViewById(R.id.movie_category);
         nameCategory.setText(moviesCategory);
 
-        MoviesAdapter moviesAdapter = new MoviesAdapter(moviesNames, imagesID, moviesGrades, moviesGenres);
+        MoviesAdapter moviesAdapter = new MoviesAdapter(context, moviesNames, imagesID, moviesGrades, moviesGenres);
 
         RecyclerView movieRecycler = linearLayout.findViewById(R.id.movie_recycler);
         movieRecycler.setAdapter(moviesAdapter);
