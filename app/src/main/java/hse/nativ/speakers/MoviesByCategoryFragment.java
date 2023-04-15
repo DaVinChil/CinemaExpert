@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class MoviesByCategoryFragment extends Fragment {
 
     private String category;
@@ -41,5 +43,12 @@ public class MoviesByCategoryFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
 
         return layout;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BottomNavigationView view = context.findViewById(R.id.bottom_navigation);
+        view.getMenu().getItem(0).setChecked(true);
     }
 }

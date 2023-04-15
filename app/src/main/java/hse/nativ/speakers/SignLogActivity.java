@@ -55,7 +55,7 @@ public class SignLogActivity extends AppCompatActivity {
 
     protected void setButtons(){
         getStartedBtn.setOnClickListener((v) -> {
-            Intent intent = new Intent(SignLogActivity.this, SignUpActivity.class);
+            Intent intent = new Intent(SignLogActivity.this, LogInActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         });

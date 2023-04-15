@@ -1,16 +1,15 @@
 package hse.nativ.speakers;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MoviesContainerFragment extends Fragment {
 
@@ -35,5 +34,12 @@ public class MoviesContainerFragment extends Fragment {
 
         ft.commit();
         return linearLayout;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BottomNavigationView navigationView = context.findViewById(R.id.bottom_navigation);
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 }

@@ -69,14 +69,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         TextView movieGenre = movieView.findViewById(R.id.movie_genre);
         movieGenre.setText(genres[position]);
-
-        if (position >= getItemCount() - 1) {
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            float margin = 200 / ((float) mContext.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-            params.setMargins(6, 6, (int) margin, 6);
-            holder.itemView.setLayoutParams(params);
-        }
     }
 
     private void setGradeBackground(TextView movieGrade, String grade) {

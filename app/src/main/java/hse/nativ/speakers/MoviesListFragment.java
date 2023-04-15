@@ -1,7 +1,7 @@
 package hse.nativ.speakers;
 
+import android.graphics.Rect;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -9,8 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +21,10 @@ public class MoviesListFragment extends Fragment {
     private int[] imagesID;
     private String moviesCategory;
     private AppCompatActivity context;
+
+    private TextView getAllMoviesButton;
+    private TextView moviesCategoryText;
+    private RecyclerView moviesRecycler;
 
     public MoviesListFragment() {}
 
@@ -45,38 +47,61 @@ public class MoviesListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ConstraintLayout linearLayout = (ConstraintLayout) inflater.inflate(
+        ConstraintLayout constraintLayout = (ConstraintLayout) inflater.inflate(
                 R.layout.fragment_movies_list,
                 container, false);
 
-        TextView nameCategory = linearLayout.findViewById(R.id.movie_category);
-        nameCategory.setText(moviesCategory);
+        findAllViews(constraintLayout);
+
+        moviesCategoryText.setText(moviesCategory);
 
         MoviesAdapter moviesAdapter = new MoviesAdapter(context, moviesNames, imagesID, moviesGrades, moviesGenres);
 
-        RecyclerView movieRecycler = linearLayout.findViewById(R.id.movie_recycler);
-        movieRecycler.setAdapter(moviesAdapter);
+        moviesRecycler.setAdapter(moviesAdapter);
+        moviesRecycler.addItemDecoration(new EdgeDecorator(100));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        movieRecycler.setLayoutManager(layoutManager);
+        moviesRecycler.setLayoutManager(layoutManager);
 
-        return linearLayout;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        ConstraintLayout layout = (ConstraintLayout)getView();
-        TextView allButton = layout.findViewById(R.id.get_all_movies);
-        RecyclerView moviesList = layout.findViewById(R.id.movie_recycler);
-
-        allButton.setOnClickListener(view -> {
+        getAllMoviesButton.setOnClickListener(view -> {
             FragmentTransaction fragmentTransaction = context.getSupportFragmentManager().beginTransaction();
-            TextView category = layout.findViewById(R.id.movie_category);
-            MoviesByCategoryFragment movieList = new MoviesByCategoryFragment(category.getText().toString(),
-                    moviesList.getAdapter());
+            MoviesByCategoryFragment movieList = new MoviesByCategoryFragment(moviesCategoryText.getText().toString(),
+                    moviesRecycler.getAdapter());
             fragmentTransaction.replace(R.id.container, movieList);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
+
+        return constraintLayout;
+    }
+
+    private void findAllViews(ConstraintLayout view) {
+        getAllMoviesButton = view.findViewById(R.id.get_all_movies);
+        moviesCategoryText = view.findViewById(R.id.movie_category);
+        moviesRecycler = view.findViewById(R.id.movie_recycler);
+    }
+}
+
+class EdgeDecorator extends RecyclerView.ItemDecoration {
+
+    private final int edgePadding;
+
+    public EdgeDecorator(int edgePadding) {
+        this.edgePadding = edgePadding;
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        super.getItemOffsets(outRect, view, parent, state);
+        int itemCount = state.getItemCount();
+        final int itemPosition = parent.getChildAdapterPosition(view);
+
+        // no position, leave it alone
+        if (itemPosition == RecyclerView.NO_POSITION) {
+            return;
+        }
+        // last item
+        else if (itemCount > 0 && itemPosition == itemCount - 1) {
+            outRect.set(view.getPaddingLeft(), view.getPaddingTop(), edgePadding, view.getPaddingBottom());
+        }
     }
 }
