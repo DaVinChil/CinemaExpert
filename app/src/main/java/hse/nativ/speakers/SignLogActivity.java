@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -33,6 +34,7 @@ public class SignLogActivity extends AppCompatActivity {
         //FirebaseAuth.getInstance().signOut();
 
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_CinemaExpertWithNoPrimeColors);
         setContentView(R.layout.activity_sign_log);
 
         findAll();

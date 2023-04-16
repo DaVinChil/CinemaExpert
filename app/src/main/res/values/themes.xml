@@ -1,20 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.CinemaExpert" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/mainColor</item>
         <item name="colorPrimaryDark">@color/mainColor</item>
         <item name="android:windowBackground">@color/mainColor</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorAccent">@color/white</item>
-        <!-- Secondary brand color. -->
         <item name="android:windowActivityTransitions">true</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor">#302B2B</item>
-
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:navigationBarColor">@color/mainColor</item>
-
     </style>
+
+    <style name="Theme.CinemaExpertWithNoPrimeColors" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/mainColor</item>
+        <item name="colorPrimaryDark">@color/mainColor</item>
+        <item name="android:windowBackground">@color/mainColor</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:statusBarColor">#302B2B</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:navigationBarColor">@color/mainColor</item>
+    </style>
+
 </resources>

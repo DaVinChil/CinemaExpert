@@ -22,6 +22,7 @@ public class MainScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_CinemaExpert);
         setContentView(R.layout.activity_main_screen);
         context = this;
 

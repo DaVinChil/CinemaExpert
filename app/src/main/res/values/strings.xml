@@ -19,6 +19,4 @@
     <string name="get_started">Get Started</string>
     <string name="intro_sentence">Sit back, relax, and enjoy the magic of \n\n\n\n from wherever you are.</string>
     <string name="chose_all_movies_list">all</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
