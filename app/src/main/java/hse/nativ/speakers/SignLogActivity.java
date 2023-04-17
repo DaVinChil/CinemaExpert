@@ -60,6 +60,7 @@ public class SignLogActivity extends AppCompatActivity {
             Intent intent = new Intent(SignLogActivity.this, LogInActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            finish();
         });
     }
 

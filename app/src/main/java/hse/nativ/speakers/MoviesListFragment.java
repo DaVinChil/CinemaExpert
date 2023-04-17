@@ -55,7 +55,7 @@ public class MoviesListFragment extends Fragment {
 
         moviesCategoryText.setText(moviesCategory);
 
-        MoviesAdapter moviesAdapter = new MoviesAdapter(context, moviesNames, imagesID, moviesGrades, moviesGenres);
+        MoviesAdapter moviesAdapter = new MoviesAdapter(moviesNames, imagesID, moviesGrades, moviesGenres);
 
         moviesRecycler.setAdapter(moviesAdapter);
         moviesRecycler.addItemDecoration(new EdgeDecorator(100));

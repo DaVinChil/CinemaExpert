@@ -2,9 +2,7 @@ package hse.nativ.speakers;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,10 +27,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     private int[] imagesID;
     private String[] grades;
     private String[] genres;
-    private Context mContext;
 
-    public MoviesAdapter(Context context, String[] names, int[] imagesID, String[] grades, String[] genres) {
-        mContext = context;
+    public MoviesAdapter(String[] names, int[] imagesID, String[] grades, String[] genres) {
         this.names = names;
         this.imagesID = imagesID;
         this.grades = grades;
