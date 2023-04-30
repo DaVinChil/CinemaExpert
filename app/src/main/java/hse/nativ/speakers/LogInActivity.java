@@ -130,7 +130,7 @@ public class LogInActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(v -> {
             Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
             startActivity(intent);
-            finish();
+            //finish();
         });
     }
 

@@ -58,7 +58,7 @@ public class MoviesListFragment extends Fragment {
         MoviesAdapter moviesAdapter = new MoviesAdapter(moviesNames, imagesID, moviesGrades, moviesGenres);
 
         moviesRecycler.setAdapter(moviesAdapter);
-        moviesRecycler.addItemDecoration(new EdgeDecorator(100));
+        moviesRecycler.addItemDecoration(new EdgeDecorator(40));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         moviesRecycler.setLayoutManager(layoutManager);
 
@@ -102,6 +102,9 @@ class EdgeDecorator extends RecyclerView.ItemDecoration {
         // last item
         else if (itemCount > 0 && itemPosition == itemCount - 1) {
             outRect.set(view.getPaddingLeft(), view.getPaddingTop(), edgePadding, view.getPaddingBottom());
+        }
+        else if (itemCount > 0 && itemPosition == 0) {
+            outRect.set(edgePadding - 5, view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom());
         }
     }
 }

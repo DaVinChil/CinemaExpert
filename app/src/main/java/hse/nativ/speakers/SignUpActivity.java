@@ -79,6 +79,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     protected void setBackArrow() {
         backArrow.setOnClickListener(view -> {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
             finish();
         });
     }
@@ -139,7 +141,7 @@ public class SignUpActivity extends AppCompatActivity {
         signInBtn.setOnClickListener(view -> {
             Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
             startActivity(intent);
-            finish();
+            //finish();
         });
     }
 
