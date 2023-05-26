@@ -54,7 +54,6 @@ public class LogInActivity extends AppCompatActivity {
 
     protected void setViews() {
         setPasswordEye();
-        setBackArrow();
         setSignUpBtn();
         setLoginBtn();
         setForgotPassBtn();
@@ -152,12 +151,6 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
-    protected void setBackArrow() {
-        backArrow.setOnClickListener(view -> {
-            finish();
-        });
-    }
-
     protected void findAll() {
         loginBtn = findViewById(R.id.main_sign_up_button);
         signUpBtn = findViewById(R.id.sign_up);
@@ -171,8 +164,6 @@ public class LogInActivity extends AppCompatActivity {
         yandexSignup = findViewById(R.id.yandex_sign);
         googleSignup = findViewById(R.id.google_sign);
         vkSignup = findViewById(R.id.vk_sign);
-
-        backArrow = findViewById(R.id.back_arrow);
     }
 
     @Override

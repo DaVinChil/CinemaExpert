@@ -74,7 +74,6 @@ public class SignUpActivity extends AppCompatActivity {
         setSignInBtn();
         setSocialMediaSignup();
         setSignUpBtn();
-        setBackArrow();
     }
 
     protected void setBackArrow() {
@@ -268,7 +267,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     protected void findAll() {
-        backArrow = findViewById(R.id.back_arrow);
         emailInput = findViewById(R.id.email_input);
         userNameInput = findViewById(R.id.user_name_input);
         confirmPassInput = findViewById(R.id.confirm_password_input);
