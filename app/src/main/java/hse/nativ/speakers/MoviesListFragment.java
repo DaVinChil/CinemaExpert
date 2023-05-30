@@ -23,11 +23,12 @@ public class MoviesListFragment extends Fragment {
     private TextView moviesCategoryText;
     private RecyclerView moviesRecycler;
 
-    public MoviesListFragment(String moviesCategory, int count) {
+    public MoviesListFragment(String moviesCategory) {
         this.context = MainScreenActivity.context;
         this.moviesCategory = moviesCategory;
-        this.count = count;
     }
+
+    public void setCount(int count) {this.count = count;}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,23 +39,20 @@ public class MoviesListFragment extends Fragment {
 
         findAllViews(constraintLayout);
 
-        moviesCategoryText.setText(moviesCategory + " " + count);
-
         if (moviesCategory.contains("Top")) {
+            moviesCategoryText.setText(moviesCategory + " " + count);
             DataInflater.inflateTopRatedMovies(moviesRecycler, count);
         }
+        else {
+            DataInflater.inflateTopByGenre(moviesRecycler, moviesCategory);
+            moviesCategoryText.setText(moviesCategory);
+        }
+
         moviesRecycler.addItemDecoration(new EdgeDecorator(40));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         moviesRecycler.setLayoutManager(layoutManager);
 
-        getAllMoviesButton.setOnClickListener(view -> {
-            FragmentTransaction fragmentTransaction = context.getSupportFragmentManager().beginTransaction();
-            MoviesByCategoryFragment movieList = new MoviesByCategoryFragment(moviesCategoryText.getText().toString(),
-                    moviesRecycler.getAdapter());
-            fragmentTransaction.replace(R.id.container, movieList);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        });
+        setButton();
 
         return constraintLayout;
     }
@@ -63,6 +61,17 @@ public class MoviesListFragment extends Fragment {
         getAllMoviesButton = view.findViewById(R.id.get_all_movies);
         moviesCategoryText = view.findViewById(R.id.movie_category);
         moviesRecycler = view.findViewById(R.id.movie_recycler);
+    }
+
+    private void setButton() {
+        getAllMoviesButton.setOnClickListener(view -> {
+            FragmentTransaction fragmentTransaction = context.getSupportFragmentManager().beginTransaction();
+            MoviesByCategoryFragment movieList = new MoviesByCategoryFragment(moviesCategoryText.getText().toString(),
+                    moviesRecycler.getAdapter());
+            fragmentTransaction.replace(R.id.container, movieList);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        });
     }
 }
 
