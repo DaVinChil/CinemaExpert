@@ -1,6 +1,7 @@
 package hse.nativ.speakers;
 
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +10,10 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
@@ -22,21 +27,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         }
     }
 
-    private String[] names;
-    private int[] imagesID;
-    private String[] grades;
-    private String[] genres;
+    private List<Movie> movies;
 
-    public MoviesAdapter(String[] names, int[] imagesID, String[] grades, String[] genres) {
-        this.names = names;
-        this.imagesID = imagesID;
-        this.grades = grades;
-        this.genres = genres;
+    public MoviesAdapter(List<Movie> movies) {
+        this.movies = movies;
     }
 
     @Override
     public int getItemCount() {
-        return names.length;
+        return movies.size();
     }
 
     @Override
@@ -51,19 +50,23 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, final int position) {
         LinearLayout movieView = holder.linearLayout;
 
+        Movie movie = movies.get(position);
+
+        ImageDatabase movieImage = movie.getImage();
         ImageView imageMovie = movieView.findViewById(R.id.movie_picture);
-        Drawable drawable = ContextCompat.getDrawable(movieView.getContext(), imagesID[position]);
-        imageMovie.setImageDrawable(drawable);
+        //Drawable drawable = ContextCompat.getDrawable(movieView.getContext(), movieImage.getUrl());
+        //imageMovie.setImageDrawable(drawable);
+        Glide.with(MainScreenActivity.context).load(movieImage.getUrl()).into(imageMovie);
 
         TextView movieName = movieView.findViewById(R.id.movie_name);
-        movieName.setText(names[position]);
+        movieName.setText(movie.getTitle());
 
         TextView movieGrade = movieView.findViewById(R.id.movie_grade);
-        movieGrade.setText(grades[position]);
-        setGradeBackground(movieGrade, grades[position]);
+        movieGrade.setText(String.valueOf(movie.getChartRating()));
+        setGradeBackground(movieGrade, String.valueOf(movie.getChartRating()));
 
         TextView movieGenre = movieView.findViewById(R.id.movie_genre);
-        movieGenre.setText(genres[position]);
+        movieGenre.setText(movie.getGenre().get(0));
     }
 
     private void setGradeBackground(TextView movieGrade, String grade) {

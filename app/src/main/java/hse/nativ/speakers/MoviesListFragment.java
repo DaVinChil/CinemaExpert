@@ -15,33 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MoviesListFragment extends Fragment {
 
-    private String[] moviesNames;
-    private String[] moviesGenres;
-    private String[] moviesGrades;
-    private int[] imagesID;
     private String moviesCategory;
+    private int count;
     private AppCompatActivity context;
 
     private TextView getAllMoviesButton;
     private TextView moviesCategoryText;
     private RecyclerView moviesRecycler;
 
-    public MoviesListFragment() {}
-
-    public MoviesListFragment(Movie[] movies, String moviesCategory) {
+    public MoviesListFragment(String moviesCategory, int count) {
         this.context = MainScreenActivity.context;
         this.moviesCategory = moviesCategory;
-
-        moviesNames = new String[movies.length];
-        moviesGrades = new String[movies.length];
-        imagesID = new int[movies.length];
-        moviesGenres = new String[movies.length];
-        for (int i = 0; i < movies.length; ++i) {
-            moviesNames[i] = movies[i].getName();
-            moviesGenres[i] = movies[i].getGenre();
-            moviesGrades[i] = movies[i].getGrade();
-            imagesID[i] = movies[i].getImageResourceID();
-        }
+        this.count = count;
     }
 
     @Override
@@ -53,11 +38,11 @@ public class MoviesListFragment extends Fragment {
 
         findAllViews(constraintLayout);
 
-        moviesCategoryText.setText(moviesCategory);
+        moviesCategoryText.setText(moviesCategory + " " + count);
 
-        MoviesAdapter moviesAdapter = new MoviesAdapter(moviesNames, imagesID, moviesGrades, moviesGenres);
-
-        moviesRecycler.setAdapter(moviesAdapter);
+        if (moviesCategory.contains("Top")) {
+            DataInflater.inflateTopRatedMovies(moviesRecycler, count);
+        }
         moviesRecycler.addItemDecoration(new EdgeDecorator(40));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         moviesRecycler.setLayoutManager(layoutManager);

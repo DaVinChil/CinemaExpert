@@ -26,10 +26,10 @@ public class MoviesContainerFragment extends Fragment {
                 container, false);
 
         FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
-        MoviesListFragment moviesList1 = new MoviesListFragment(Movie.movies, "Top 100");
+        MoviesListFragment moviesList1 = new MoviesListFragment("Top", 100);
         ft.add(R.id.movies_list_1, moviesList1);
 
-        MoviesListFragment moviesList2 = new MoviesListFragment(Movie.movies, "Top 250");
+        MoviesListFragment moviesList2 = new MoviesListFragment("Top", 10);
         ft.add(R.id.movies_list_2, moviesList2);
 
         ft.commit();
