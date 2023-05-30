@@ -34,11 +34,10 @@
 
     <TextView
         android:id="@+id/movie_name"
-        android:layout_width="match_parent"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
         android:textColor="@color/white"
-        android:translationX="10dp"
         android:textSize="13sp"
         android:ellipsize="end"
         android:maxLines="2"
@@ -46,10 +45,10 @@
 
     <TextView
         android:id="@+id/movie_genre"
-        android:layout_width="100dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:textColor="@color/white"
-        android:translationX="10dp"
         android:textSize="10sp"
         android:fontFamily="@font/inter_extrabold"/>
 
