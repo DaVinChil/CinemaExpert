@@ -24,7 +24,7 @@ public class MainScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         context = this;
         setTheme();
-        setToolbar();
+        //setToolbar();
         setBottomNavigationView();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

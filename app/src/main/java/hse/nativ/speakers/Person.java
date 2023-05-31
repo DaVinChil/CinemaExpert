@@ -5,7 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonDatabase {
+public class Person {
     private String id;
     private ImageDatabase photo;
     private String fullName;
@@ -19,7 +19,7 @@ public class PersonDatabase {
     private List<String> filmography = new ArrayList<>();
     private FirebaseFirestore database;
 
-    public PersonDatabase() {}
+    public Person() {}
 
     public void setId(String id) {this.id = id;}
     public String getId() {return id;}
