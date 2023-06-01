@@ -38,7 +38,7 @@ public class CustomizeHelper {
         String result;
         if (dates.length == 3) {
             Month monthName = Month.of(Integer.parseInt(dates[1]));
-            result = dates[2] + " " + monthName.name().toLowerCase() + " " + dates[0];
+            result = Integer.parseInt(dates[2]) + " " + monthName.name().toLowerCase() + " " + dates[0];
         } else if (dates.length == 2) {
             Month monthName = Month.of(Integer.parseInt(dates[1]));
             result = monthName.name().toLowerCase() + " " + dates[0];
