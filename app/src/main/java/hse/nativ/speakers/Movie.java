@@ -17,7 +17,6 @@ public class Movie {
     private List<String> directors = new ArrayList<>();
     private List<String> writers = new ArrayList<>();
     private String description;
-    private FirebaseFirestore database;
 
     static class Actor {
         private String fullName;

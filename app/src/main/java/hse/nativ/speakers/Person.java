@@ -17,7 +17,6 @@ public class Person {
     private double height;
     private String gender;;
     private List<String> filmography = new ArrayList<>();
-    private FirebaseFirestore database;
 
     public Person() {}
 

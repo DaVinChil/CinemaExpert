@@ -11,13 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
-import java.util.List;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MovieDetailsFragment extends Fragment {
 
@@ -31,23 +28,23 @@ public class MovieDetailsFragment extends Fragment {
 
         ConstraintLayout view = (ConstraintLayout)inflater.inflate(R.layout.fragment_movie_details, container, false);
 
-        ImageView movieImage = view.findViewById(R.id.movie_image);
+        ImageView movieImage = view.findViewById(R.id.movie_details_image);
         Glide.with(MainScreenActivity.context)
                 .load(movie.getImage().getUrl())
                 .into(movieImage);
 
-        TextView movieTitle = view.findViewById(R.id.movie_title);
+        TextView movieTitle = view.findViewById(R.id.movie_details_title);
         movieTitle.setText(movie.getTitle());
         movieTitle.setTextColor(getResources().getColor(R.color.white));
 
-        TextView movieDescription = view.findViewById(R.id.movie_description);
+        TextView movieDescription = view.findViewById(R.id.movie_details_description);
         movieDescription.setText(movie.getDescription());
 
-        TextView movieGrade = view.findViewById(R.id.grade);
+        TextView movieGrade = view.findViewById(R.id.movie_details_grade);
         movieGrade.setText(String.valueOf(movie.getChartRating()));
         CustomizeHelper.setGradeBackground(movieGrade, String.valueOf(movie.getChartRating()));
 
-        TextView movieGenres = view.findViewById(R.id.movie_genres);
+        TextView movieGenres = view.findViewById(R.id.movie_details_genres);
         String genres = "";
         for (String genre : movie.getGenre()) {
             genres += genre + ", ";
@@ -55,8 +52,14 @@ public class MovieDetailsFragment extends Fragment {
         genres = genres.substring(0, genres.length() - 2);
         movieGenres.setText(genres);
 
-        TextView movieYear = view.findViewById(R.id.premier_year);
+        TextView movieYear = view.findViewById(R.id.movie_details_premier_year);
         movieYear.setText(String.valueOf(movie.getYear()));
+
+        TextView movieRunningTime = view.findViewById(R.id.movie_details_running_time);
+        long runningTimeInMinutes = movie.getRunningTimeInMinutes();
+        long hours = runningTimeInMinutes / 60;
+        long minutes = runningTimeInMinutes % 60;
+        movieRunningTime.setText(hours + "h " + minutes + "m");
 
         RecyclerView actors = view.findViewById(R.id.movie_details_actors);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -64,5 +67,12 @@ public class MovieDetailsFragment extends Fragment {
         DataInflater.inflateActorsByMovieId(actors, movie.getId());
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BottomNavigationView navigationView = MainScreenActivity.context.findViewById(R.id.bottom_navigation);
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 }

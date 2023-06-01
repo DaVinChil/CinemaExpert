@@ -97,4 +97,26 @@ public class DataInflater {
                     });
         });
     }
+
+    public static void inflateFilmographyByPersonId(RecyclerView recyclerView, String personId) {
+        executorService.submit(() -> {
+            List<Movie> movies = new ArrayList<>();
+            database.collection("Movies")
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                Movie movie = documentSnapshot.toObject(Movie.class);
+                                for (Movie.Actor actor : movie.getActors()) {
+                                    if (personId.equals(actor.getId())) {
+                                        movies.add(movie);
+                                        break;
+                                    }
+                                }
+                            }
+                            recyclerView.setAdapter(new MoviesAdapter(movies));
+                        }
+                    });
+        });
+    }
 }

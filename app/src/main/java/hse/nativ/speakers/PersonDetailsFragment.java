@@ -1,0 +1,64 @@
+package hse.nativ.speakers;
+
+import android.os.Bundle;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.bumptech.glide.Glide;
+import java.time.LocalDate;
+import java.time.Period;
+
+public class PersonDetailsFragment extends Fragment {
+
+    private Person person;
+    PersonDetailsFragment(Person person) {this.person = person;}
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        ConstraintLayout view = (ConstraintLayout) inflater.inflate(R.layout.fragment_person_details, container, false);
+
+        ImageView personPhoto = view.findViewById(R.id.person_details_photo);
+        Glide.with(MainScreenActivity.context).load(person.getPhoto().getUrl()).into(personPhoto);
+
+        TextView personFullName = view.findViewById(R.id.person_details_name);
+        personFullName.setText(person.getFullName());
+
+        TextView lifeDate = view.findViewById(R.id.person_details_birth_date);
+        TextView yearAndHeight = view.findViewById(R.id.person_details_hight_and_age);
+        lifeAndHeightSet(yearAndHeight, lifeDate);
+
+        RecyclerView personFilmography = view.findViewById(R.id.person_details_filmography);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        personFilmography.setLayoutManager(layoutManager);
+        personFilmography.addItemDecoration(new CustomizeHelper.EdgeDecorator(40));
+        DataInflater.inflateFilmographyByPersonId(personFilmography, person.getId());
+
+        return view;
+    }
+
+    private void lifeAndHeightSet(TextView yearAndHeight, TextView lifeDate) {
+        double height = person.getHeight();
+        String birthDate = person.getBirthDate();
+        LocalDate birthLocalDate = CustomizeHelper.parseDateAsString(birthDate);
+        String birthDateMothName = CustomizeHelper.getDateWithMonthsNames(birthDate);
+        String deathDate = person.getDeathDate();
+        if (!deathDate.equals("-")) {
+            String deathDateMonthName = CustomizeHelper.getDateWithMonthsNames(deathDate);
+            LocalDate deathLocaleDate = CustomizeHelper.parseDateAsString(deathDate);
+            lifeDate.setText(birthDateMothName + " - " + deathDateMonthName);
+            yearAndHeight.setText(Period.between(birthLocalDate, deathLocaleDate).getYears() + " years " + " · " + height + " cm");
+        } else {
+            lifeDate.setText(birthDateMothName);
+            yearAndHeight.setText(birthLocalDate.getYear() + " years " + " · " + height + " cm");
+        }
+    }
+}

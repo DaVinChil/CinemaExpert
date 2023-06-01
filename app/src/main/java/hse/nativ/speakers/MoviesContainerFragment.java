@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesContainerFragment extends Fragment {
-    private static LinearLayout view;
+    private LinearLayout view;
     private AppCompatActivity context;
 
     public MoviesContainerFragment() {
@@ -45,10 +45,10 @@ public class MoviesContainerFragment extends Fragment {
         ft.add(R.id.movies_list_9, new MoviesListFragment("Biography"));
         ft.add(R.id.movies_list_10, new MoviesListFragment("War"));
         ft.add(R.id.movies_list_11, new MoviesListFragment("Fantasy"));
+        ft.commit();
 
         view = linearLayout;
-        ft.commit();
-        return linearLayout;
+        return view;
     }
 
     @Override

@@ -1,11 +1,13 @@
 package hse.nativ.speakers;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -66,5 +68,12 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
         }
         charactersString = charactersString.substring(0, charactersString.length() - 2);
         personCharacters.setText(charactersString);
+
+        personView.setOnClickListener(view -> {
+            FragmentTransaction ft = MainScreenActivity.context.getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.container, new PersonDetailsFragment(person));
+            ft.addToBackStack(null);
+            ft.commit();
+        });
     }
 }

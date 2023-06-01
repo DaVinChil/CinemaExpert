@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/movie_image"
+        android:id="@+id/movie_details_image"
         android:layout_width="325dp"
         android:layout_height="437dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/movie_title"
+        android:id="@+id/movie_details_title"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -25,12 +25,12 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="@+id/movie_image"
-        app:layout_constraintStart_toStartOf="@+id/movie_image"
-        app:layout_constraintTop_toBottomOf="@+id/movie_image" />
+        app:layout_constraintEnd_toEndOf="@+id/movie_details_image"
+        app:layout_constraintStart_toStartOf="@+id/movie_details_image"
+        app:layout_constraintTop_toBottomOf="@+id/movie_details_image" />
 
     <TextView
-        android:id="@+id/grade"
+        android:id="@+id/movie_details_grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -39,39 +39,41 @@
         android:fontFamily="@font/kanit_regular"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:text="MMM"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.876"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_title" />
+        app:layout_constraintTop_toBottomOf="@+id/movie_details_title" />
 
     <TextView
-        android:id="@+id/movie_genres"
+        android:id="@+id/movie_details_genres"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/plexsans_extralight"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grade" />
+        app:layout_constraintTop_toBottomOf="@+id/movie_details_running_time" />
 
     <TextView
-        android:id="@+id/premier_year"
+        android:id="@+id/movie_details_premier_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/kanit_regular"
+        android:text="MMM"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toEndOf="@+id/grade"
-        app:layout_constraintTop_toBottomOf="@+id/movie_title" />
+        app:layout_constraintHorizontal_bias="0.221"
+        app:layout_constraintStart_toEndOf="@+id/movie_details_grade"
+        app:layout_constraintTop_toBottomOf="@+id/movie_details_title" />
 
     <TextView
-        android:id="@+id/movie_description"
+        android:id="@+id/movie_details_description"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -80,7 +82,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_genres" />
+        app:layout_constraintTop_toBottomOf="@+id/movie_details_genres" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movie_details_actors"
@@ -104,8 +106,20 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.426"
-        app:layout_constraintStart_toStartOf="@+id/movie_description"
-        app:layout_constraintTop_toBottomOf="@+id/movie_description" />
+        app:layout_constraintStart_toStartOf="@+id/movie_details_description"
+        app:layout_constraintTop_toBottomOf="@+id/movie_details_description" />
+
+    <TextView
+        android:id="@+id/movie_details_running_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="7dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/movie_details_grade"
+        app:layout_constraintTop_toBottomOf="@+id/movie_details_premier_year" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

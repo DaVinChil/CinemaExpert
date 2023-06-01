@@ -48,7 +48,7 @@ public class MoviesListFragment extends Fragment {
             moviesCategoryText.setText(moviesCategory);
         }
 
-        moviesRecycler.addItemDecoration(new EdgeDecorator(40));
+        moviesRecycler.addItemDecoration(new CustomizeHelper.EdgeDecorator(40));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         moviesRecycler.setLayoutManager(layoutManager);
 
@@ -72,33 +72,5 @@ public class MoviesListFragment extends Fragment {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
-    }
-}
-
-class EdgeDecorator extends RecyclerView.ItemDecoration {
-
-    private final int edgePadding;
-
-    public EdgeDecorator(int edgePadding) {
-        this.edgePadding = edgePadding;
-    }
-
-    @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        super.getItemOffsets(outRect, view, parent, state);
-        int itemCount = state.getItemCount();
-        final int itemPosition = parent.getChildAdapterPosition(view);
-
-        // no position, leave it alone
-        if (itemPosition == RecyclerView.NO_POSITION) {
-            return;
-        }
-        // last item
-        else if (itemCount > 0 && itemPosition == itemCount - 1) {
-            outRect.set(view.getPaddingLeft(), view.getPaddingTop(), edgePadding, view.getPaddingBottom());
-        }
-        else if (itemCount > 0 && itemPosition == 0) {
-            outRect.set(edgePadding - 5, view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom());
-        }
     }
 }
