@@ -61,7 +61,6 @@ public class CustomizeHelper {
             super.getItemOffsets(outRect, view, parent, state);
             int itemCount = state.getItemCount();
             final int itemPosition = parent.getChildAdapterPosition(view);
-
             // no position, leave it alone
             if (itemPosition == RecyclerView.NO_POSITION) {
                 return;

@@ -23,7 +23,7 @@
         android:layout_marginStart="15dp"
         android:fontFamily="@font/kanit_regular"
         android:textColor="@color/white"
-        android:textSize="13dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.007"
@@ -32,13 +32,13 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/person_characters"
+        android:id="@+id/person_roles"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/kanit_regular"
         android:textColor="@color/white"
-        android:textSize="13dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/person_name"

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +63,14 @@ public class MovieDetailsFragment extends Fragment {
         movieRunningTime.setText(hours + "h " + minutes + "m");
 
         RecyclerView actors = view.findViewById(R.id.movie_details_actors);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        actors.setLayoutManager(layoutManager);
+        LinearLayoutManager actorsManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        actors.setLayoutManager(actorsManager);
         DataInflater.inflateActorsByMovieId(actors, movie.getId());
+
+        RecyclerView directors = view.findViewById(R.id.movies_details_creators);
+        LinearLayoutManager creatorsManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        directors.setLayoutManager(creatorsManager);
+        DataInflater.inflateCreatorsByMovieId(directors, movie.getId());
 
         return view;
     }

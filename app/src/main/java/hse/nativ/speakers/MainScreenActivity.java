@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,8 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainScreenActivity extends AppCompatActivity {
 
     public static AppCompatActivity context;
-    private static MoviesContainerFragment moviesContainerFragment;
-    private static ProfileFragment profileFragment;
+    private MoviesContainerFragment moviesContainerFragment;
+    private ProfileFragment profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +40,18 @@ public class MainScreenActivity extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        Toolbar toolbar = findViewById(R.id.up_toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.orange));
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.up_toolbar);
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.orange));
+        //setSupportActionBar(toolbar);
     }
 
     private void setBottomNavigationView() {
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnItemSelectedListener(item -> {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            if (item.isChecked()) return true;
             switch (item.getItemId()) {
                 case R.id.profile:
+                    if (item.isChecked()) return true;
                     if (profileFragment == null) {
                         profileFragment = new ProfileFragment();
                     }
@@ -60,8 +61,9 @@ public class MainScreenActivity extends AppCompatActivity {
                     break;
 
                 case R.id.home:
-                    fragmentTransaction.replace(R.id.container, moviesContainerFragment)
-                            .addToBackStack(null)
+                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fragmentTransaction
+                            .replace(R.id.container, moviesContainerFragment)
                             .commit();
                     break;
             }

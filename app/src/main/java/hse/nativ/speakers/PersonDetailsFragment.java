@@ -34,7 +34,9 @@ public class PersonDetailsFragment extends Fragment {
 
         TextView lifeDate = view.findViewById(R.id.person_details_birth_date);
         TextView yearAndHeight = view.findViewById(R.id.person_details_hight_and_age);
-        lifeAndHeightSet(yearAndHeight, lifeDate);
+        if (!person.getBirthDate().equals("?")) {
+            lifeAndHeightSet(yearAndHeight, lifeDate);
+        }
 
         RecyclerView personFilmography = view.findViewById(R.id.person_details_filmography);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -55,10 +57,14 @@ public class PersonDetailsFragment extends Fragment {
             String deathDateMonthName = CustomizeHelper.getDateWithMonthsNames(deathDate);
             LocalDate deathLocaleDate = CustomizeHelper.parseDateAsString(deathDate);
             lifeDate.setText(birthDateMothName + " - " + deathDateMonthName);
-            yearAndHeight.setText(Period.between(birthLocalDate, deathLocaleDate).getYears() + " years " + " · " + height + " cm");
+            if (height < 1) {
+                yearAndHeight.setText(Period.between(birthLocalDate, deathLocaleDate).getYears() + " years ");
+            } else {
+                yearAndHeight.setText(Period.between(birthLocalDate, deathLocaleDate).getYears() + " years " + " · " + height + " cm");
+            }
         } else {
             lifeDate.setText(birthDateMothName);
-            yearAndHeight.setText(birthLocalDate.getYear() + " years " + " · " + height + " cm");
+            yearAndHeight.setText(Period.between(birthLocalDate, LocalDate.now()).getYears() + " years " + " · " + height + " cm");
         }
     }
 }

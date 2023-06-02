@@ -8,14 +8,15 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class DataInflater {
@@ -25,7 +26,7 @@ public class DataInflater {
 
     public static void inflateTopRatedMovies(RecyclerView recyclerView, int count) {
        executorService.submit(() -> {
-           List<Movie> movies = new ArrayList<>();
+           Set<Movie> movies = new HashSet<>();
            database.collection("Movies")
                    .orderBy("chartRating", Query.Direction.DESCENDING)
                    .limit(count)
@@ -60,7 +61,7 @@ public class DataInflater {
                                 }
                             }
                             Collections.shuffle(movies);
-                            recyclerView.setAdapter(new MoviesAdapter(movies));
+                            recyclerView.setAdapter(new MoviesAdapter(new HashSet<>(movies)));
                         }
                     });
         });
@@ -68,7 +69,7 @@ public class DataInflater {
 
     public static void inflateActorsByMovieId(RecyclerView recyclerView, String movieId) {
         executorService.submit(() -> {
-            List<Person> actors = new ArrayList<>();
+            Set<Person> actors = new HashSet<>();
             Map<String, List<String>> characters = new HashMap<>();
             database.collection("Movies")
                     .document(movieId)
@@ -88,6 +89,7 @@ public class DataInflater {
                                                     actors.add(person);
                                                     if (actors.size() == movie.getActors().size()) {
                                                         recyclerView.setAdapter(new PersonsAdapter(actors, characters));
+                                                        return;
                                                     }
                                                 }
                                             });
@@ -100,15 +102,32 @@ public class DataInflater {
 
     public static void inflateFilmographyByPersonId(RecyclerView recyclerView, String personId) {
         executorService.submit(() -> {
-            List<Movie> movies = new ArrayList<>();
+            Set<Movie> movies = new HashSet<>();
             database.collection("Movies")
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                 Movie movie = documentSnapshot.toObject(Movie.class);
+                                boolean flag = false;
                                 for (Movie.Actor actor : movie.getActors()) {
                                     if (personId.equals(actor.getId())) {
+                                        movies.add(movie);
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (flag) continue;
+                                for (String directorId : movie.getDirectors()) {
+                                    if (personId.equals(directorId)) {
+                                        movies.add(movie);
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (flag) continue;
+                                for (String writerId : movie.getWriters()) {
+                                    if (personId.equals(writerId)) {
                                         movies.add(movie);
                                         break;
                                     }
@@ -116,6 +135,71 @@ public class DataInflater {
                             }
                             recyclerView.setAdapter(new MoviesAdapter(movies));
                         }
+                    });
+        });
+    }
+
+    public static void inflateCreatorsByMovieId(RecyclerView recyclerView, String movieId) {
+        executorService.submit(() -> {
+            Set<Person> creators = new HashSet<>();
+            Map<String, List<String>> personsTypes = new HashMap<>();
+            AtomicInteger countAdded = new AtomicInteger();
+            database.collection("Movies")
+                    .document(movieId)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Movie movie = task.getResult().toObject(Movie.class);
+                            List<String> directors = movie.getDirectors();
+                            List<String> writers = movie.getWriters();
+                            int directorsSize = directors.size();
+                            int writersSize = writers.size();
+                            for (String directorId : directors) {
+                                database.collection("Persons")
+                                        .document(directorId)
+                                        .get()
+                                        .addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()) {
+                                                Person director = task1.getResult().toObject(Person.class);
+                                                creators.add(director);
+                                                countAdded.incrementAndGet();
+                                                List<String> types = new ArrayList<>();
+                                                types.add("director");
+                                                if (writers.contains(directorId)) {
+                                                    types.add("writer");
+                                                    countAdded.incrementAndGet();
+                                                }
+                                                personsTypes.put(directorId, types);
+                                                if (countAdded.get() == directorsSize + writersSize) {
+                                                    recyclerView.setAdapter(new PersonsAdapter(creators, personsTypes));
+                                                    return;
+                                                }
+                                            }
+                                        });
+                            }
+                            for (String writerId : writers) {
+                                database.collection("Persons")
+                                        .document(writerId)
+                                        .get()
+                                        .addOnCompleteListener(task1 -> {
+                                            Person writer = task1.getResult().toObject(Person.class);
+                                            if (!creators.contains(writer)) {
+                                                creators.add(writer);
+                                                List<String> types = new ArrayList<>();
+                                                types.add("writer");
+                                                if (directors.contains(writerId)) {
+                                                    types.add("director");
+                                                }
+                                                personsTypes.put(writerId, types);
+                                                countAdded.incrementAndGet();
+                                                if (countAdded.get() == writersSize + directorsSize) {
+                                                    recyclerView.setAdapter(new PersonsAdapter(creators, personsTypes));
+                                                    return;
+                                                }
+                                            }
+                                        });
+                                }
+                            }
                     });
         });
     }

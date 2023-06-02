@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
@@ -28,8 +30,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     private List<Movie> movies;
 
-    public MoviesAdapter(List<Movie> movies) {
-        this.movies = movies;
+    public MoviesAdapter(Set<Movie> movies) {
+        this.movies = new ArrayList<>(movies);
     }
 
     @Override
