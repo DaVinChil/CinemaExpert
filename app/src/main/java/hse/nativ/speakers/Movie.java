@@ -81,5 +81,20 @@ public class Movie {
     public void setWriters(List<String> writers) {this.writers = writers;}
     public List<String> getWriters() {return writers;}
     public void addWriter(String writerId) {writers.add(writerId);}
+
+    @Override
+    public int hashCode() {
+        return Integer.parseInt(id.substring(2));
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object != null) {
+            if (object instanceof Movie) {
+                return this.id.equals(((Movie) object).id);
+            }
+        }
+        return false;
+    }
 }
 

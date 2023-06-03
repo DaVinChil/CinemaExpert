@@ -26,7 +26,7 @@ public class DataInflater {
 
     public static void inflateTopRatedMovies(RecyclerView recyclerView, int count) {
        executorService.submit(() -> {
-           Set<Movie> movies = new HashSet<>();
+           List<Movie> movies = new ArrayList<>();
            database.collection("Movies")
                    .orderBy("chartRating", Query.Direction.DESCENDING)
                    .limit(count)
@@ -61,7 +61,7 @@ public class DataInflater {
                                 }
                             }
                             Collections.shuffle(movies);
-                            recyclerView.setAdapter(new MoviesAdapter(new HashSet<>(movies)));
+                            recyclerView.setAdapter(new MoviesAdapter(movies));
                         }
                     });
         });
@@ -69,7 +69,7 @@ public class DataInflater {
 
     public static void inflateActorsByMovieId(RecyclerView recyclerView, String movieId) {
         executorService.submit(() -> {
-            Set<Person> actors = new HashSet<>();
+            List<Person> actors = new ArrayList<>();
             Map<String, List<String>> characters = new HashMap<>();
             database.collection("Movies")
                     .document(movieId)
@@ -102,7 +102,7 @@ public class DataInflater {
 
     public static void inflateFilmographyByPersonId(RecyclerView recyclerView, String personId) {
         executorService.submit(() -> {
-            Set<Movie> movies = new HashSet<>();
+            List<Movie> movies = new ArrayList<>();
             database.collection("Movies")
                     .get()
                     .addOnCompleteListener(task -> {
@@ -141,7 +141,7 @@ public class DataInflater {
 
     public static void inflateCreatorsByMovieId(RecyclerView recyclerView, String movieId) {
         executorService.submit(() -> {
-            Set<Person> creators = new HashSet<>();
+            List<Person> creators = new ArrayList<>();
             Map<String, List<String>> personsTypes = new HashMap<>();
             AtomicInteger countAdded = new AtomicInteger();
             database.collection("Movies")
@@ -187,9 +187,6 @@ public class DataInflater {
                                                 creators.add(writer);
                                                 List<String> types = new ArrayList<>();
                                                 types.add("writer");
-                                                if (directors.contains(writerId)) {
-                                                    types.add("director");
-                                                }
                                                 personsTypes.put(writerId, types);
                                                 countAdded.incrementAndGet();
                                                 if (countAdded.get() == writersSize + directorsSize) {

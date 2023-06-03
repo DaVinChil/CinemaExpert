@@ -31,8 +31,8 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
     private List<Person> persons;
     private Map<String, List<String>> roles;
 
-    public PersonsAdapter(Set<Person> persons, Map<String, List<String>> roles) {
-        this.persons = new ArrayList<>(persons);
+    public PersonsAdapter(List<Person> persons, Map<String, List<String>> roles) {
+        this.persons = persons;
         this.roles = roles;
     }
 

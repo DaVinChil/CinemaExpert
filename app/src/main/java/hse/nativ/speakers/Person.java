@@ -55,4 +55,19 @@ public class Person {
     public void addFilm(String movieId) {
         filmography.add(movieId);
     }
+
+    @Override
+    public int hashCode() {
+        return Integer.parseInt(id.substring(2));
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object != null) {
+            if (object instanceof Person) {
+                return this.id.equals(((Person) object).id);
+            }
+        }
+        return false;
+    }
 }

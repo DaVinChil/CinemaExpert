@@ -30,8 +30,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     private List<Movie> movies;
 
-    public MoviesAdapter(Set<Movie> movies) {
-        this.movies = new ArrayList<>(movies);
+    public MoviesAdapter(List<Movie> movies) {
+        this.movies = movies;
     }
 
     @Override
