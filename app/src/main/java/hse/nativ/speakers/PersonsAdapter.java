@@ -42,7 +42,7 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
     }
 
     @Override
-    public PersonsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ConstraintLayout personView = (ConstraintLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_person, parent, false);
         return new PersonsAdapter.ViewHolder(personView);

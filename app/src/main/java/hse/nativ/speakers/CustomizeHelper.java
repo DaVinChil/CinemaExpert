@@ -74,4 +74,28 @@ public class CustomizeHelper {
             }
         }
     }
+
+    static class SearchDecorator extends RecyclerView.ItemDecoration {
+
+        private final int edgePadding;
+
+        public SearchDecorator(int edgePadding) {
+            this.edgePadding = edgePadding;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            super.getItemOffsets(outRect, view, parent, state);
+            int itemCount = state.getItemCount();
+            final int itemPosition = parent.getChildAdapterPosition(view);
+            // no position, leave it alone
+            if (itemPosition == RecyclerView.NO_POSITION) {
+                return;
+            }
+            // last item
+            else if (itemCount > 0 && itemPosition == itemCount - 1) {
+                outRect.set(view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), edgePadding);
+            }
+        }
+    }
 }

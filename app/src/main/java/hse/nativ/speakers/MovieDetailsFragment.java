@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MovieDetailsFragment extends Fragment {
 
-    private Movie movie;
+    private final Movie movie;
 
     MovieDetailsFragment(Movie movie) {this.movie = movie;}
 
@@ -27,7 +28,7 @@ public class MovieDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ConstraintLayout view = (ConstraintLayout)inflater.inflate(R.layout.fragment_movie_details, container, false);
+        ScrollView view = (ScrollView) inflater.inflate(R.layout.fragment_movie_details, container, false);
 
         ImageView movieImage = view.findViewById(R.id.movie_details_image);
         Glide.with(MainScreenActivity.context)
@@ -73,12 +74,5 @@ public class MovieDetailsFragment extends Fragment {
         DataInflater.inflateCreatorsByMovieId(directors, movie.getId());
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        BottomNavigationView navigationView = MainScreenActivity.context.findViewById(R.id.bottom_navigation);
-        navigationView.getMenu().getItem(0).setChecked(true);
     }
 }

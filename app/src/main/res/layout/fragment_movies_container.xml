@@ -1,69 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
     android:orientation="vertical"
     tools:context=".MoviesContainerFragment">
 
-    <FrameLayout
-        android:id="@+id/movies_list_1"
+    <LinearLayout
+        android:id="@+id/movies_container_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/movies_list_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/movies_list_12"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/movies_list_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+        <FrameLayout
+            android:id="@+id/movies_list_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import java.time.LocalDate;
@@ -17,14 +18,14 @@ import java.time.Period;
 
 public class PersonDetailsFragment extends Fragment {
 
-    private Person person;
+    private final Person person;
     PersonDetailsFragment(Person person) {this.person = person;}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ConstraintLayout view = (ConstraintLayout) inflater.inflate(R.layout.fragment_person_details, container, false);
+        ScrollView view = (ScrollView) inflater.inflate(R.layout.fragment_person_details, container, false);
 
         ImageView personPhoto = view.findViewById(R.id.person_details_photo);
         Glide.with(MainScreenActivity.context).load(person.getPhoto().getUrl()).into(personPhoto);

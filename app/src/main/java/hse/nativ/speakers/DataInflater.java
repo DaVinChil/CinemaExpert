@@ -5,17 +5,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -198,6 +197,43 @@ public class DataInflater {
                                 }
                             }
                     });
+        });
+    }
+
+    public static void inflateAllCollections(RecyclerView recyclerView, List<Person> persons, List<Movie> movies) {
+        executorService.submit(() -> {
+            AtomicBoolean personsAdded = new AtomicBoolean(false);
+            AtomicBoolean moviesAdded = new AtomicBoolean(false);
+           database.collection("Movies")
+                   .get()
+                   .addOnCompleteListener(task -> {
+                      if (task.isSuccessful()) {
+                          QuerySnapshot snapshots = task.getResult();
+                          int moviesCount = snapshots.size();
+                          for (QueryDocumentSnapshot documentSnapshot : snapshots) {
+                              Movie movie = documentSnapshot.toObject(Movie.class);
+                              movies.add(movie);
+                              if (movies.size() == moviesCount) moviesAdded.set(true);
+                          }
+                      }
+                   });
+           database.collection("Persons")
+                   .get()
+                   .addOnCompleteListener(task -> {
+                       if (task.isSuccessful()) {
+                           QuerySnapshot snapshots = task.getResult();
+                           int personsCount = snapshots.size();
+                           for (QueryDocumentSnapshot documentSnapshot : snapshots) {
+                               Person person = documentSnapshot.toObject(Person.class);
+                               persons.add(person);
+                               if (persons.size() == personsCount) personsAdded.set(true);
+                           }
+                       }
+                   });
+           while (!(personsAdded.get() && moviesAdded.get()));
+           Collections.shuffle(movies);
+           Collections.shuffle(persons);
+           recyclerView.setAdapter(new SearchResultsAdapter(movies, persons));
         });
     }
 }

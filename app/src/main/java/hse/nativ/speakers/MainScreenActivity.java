@@ -19,13 +19,14 @@ public class MainScreenActivity extends AppCompatActivity {
     public static AppCompatActivity context;
     private MoviesContainerFragment moviesContainerFragment;
     private ProfileFragment profileFragment;
+    private SearchMoviesFragment searchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-        setTheme();
-        //setToolbar();
+        setTheme(R.style.Theme_CinemaExpert);
+        setContentView(R.layout.activity_main_screen);
         setBottomNavigationView();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -34,38 +35,34 @@ public class MainScreenActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    private void setTheme() {
-        setTheme(R.style.Theme_CinemaExpert);
-        setContentView(R.layout.activity_main_screen);
-    }
-
-    private void setToolbar() {
-        //Toolbar toolbar = findViewById(R.id.up_toolbar);
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.orange));
-        //setSupportActionBar(toolbar);
-    }
-
     private void setBottomNavigationView() {
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnItemSelectedListener(item -> {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            switch (item.getItemId()) {
-                case R.id.profile:
-                    if (item.isChecked()) return true;
-                    if (profileFragment == null) {
-                        profileFragment = new ProfileFragment();
-                    }
-                    fragmentTransaction.replace(R.id.container, profileFragment)
-                            .addToBackStack(null)
-                            .commit();
-                    break;
-
-                case R.id.home:
-                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    fragmentTransaction
-                            .replace(R.id.container, moviesContainerFragment)
-                            .commit();
-                    break;
+            if (item.isChecked()) return true;
+            if (item.getItemId() == R.id.profile) {
+                if (profileFragment == null) {
+                    profileFragment = new ProfileFragment();
+                }
+                fragmentTransaction
+                        .replace(R.id.container, profileFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+            else if (item.getItemId() == R.id.home) {
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentTransaction
+                        .replace(R.id.container, moviesContainerFragment)
+                        .commit();
+            }
+            else if (item.getItemId() == R.id.search) {
+                if (searchFragment == null) {
+                    searchFragment = new SearchMoviesFragment();
+                }
+                fragmentTransaction
+                        .replace(R.id.container, searchFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
             return true;
         });

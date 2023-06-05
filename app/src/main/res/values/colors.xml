@@ -12,4 +12,5 @@
     <color name="gradeMovieColorGray">#535253</color>
     <color name="gradeMovieColorRed">#F40E0E</color>
     <color name="orange">#FF4A11</color>
+    <color name="searchViewBackground">#807F7E</color>
 </resources>
