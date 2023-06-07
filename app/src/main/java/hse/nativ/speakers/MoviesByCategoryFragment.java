@@ -1,19 +1,13 @@
 package hse.nativ.speakers;
 
 import android.os.Bundle;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,16 +26,16 @@ public class MoviesByCategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ScrollView layout = (ScrollView) inflater.inflate(R.layout.fragment_movies_by_category, container, false);
-        TextView categoryMovies = layout.findViewById(R.id.movies_category);
+        ConstraintLayout view = (ConstraintLayout) inflater.inflate(R.layout.fragment_movies_by_category, container, false);
+        TextView categoryMovies = view.findViewById(R.id.movies_category);
         categoryMovies.setText(category);
 
-        RecyclerView recyclerView = layout.findViewById(R.id.movies_category_recycler);
+        RecyclerView recyclerView = view.findViewById(R.id.movies_category_recycler);
         recyclerView.setAdapter(movieRecyclerAdapter);
         GridLayoutManager manager = new GridLayoutManager(MainScreenActivity.context, 3, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
 
-        return layout;
+        return view;
     }
 
     @Override

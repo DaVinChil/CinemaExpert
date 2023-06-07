@@ -15,11 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.load.engine.Resource;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchMoviesFragment extends Fragment {
+    private ConstraintLayout view;
     private SearchView searchView;
     private RecyclerView results;
     private List<Person> persons = new ArrayList<>();
@@ -30,6 +33,8 @@ public class SearchMoviesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (view != null) return view;
+
         ConstraintLayout view = (ConstraintLayout) inflater.inflate(R.layout.fragment_search_movies, container, false);
         searchView = view.findViewById(R.id.search_movies_string);
         results = view.findViewById(R.id.search_results_suggestions);
@@ -39,29 +44,12 @@ public class SearchMoviesFragment extends Fragment {
         Resources r = getResources();
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, r.getDisplayMetrics());
         results.addItemDecoration(new CustomizeHelper.SearchDecorator((int)px));
-        DataInflater.inflateAllCollections(results, persons, movies);
+        DataInflater.inflateAllCollections(persons, movies);
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-               /* searchMovies.clear();
-                searchPersons.clear();
-                if (query.length() > 0) {
-                    for (Movie movie : movies) {
-                        if (movie.getTitle().toLowerCase().contains(query.toLowerCase())) {
-                            searchMovies.add(movie);
-                        }
-                    }
-                    for (Person person : persons) {
-                        if (person.getFullName().toLowerCase().contains(query.toLowerCase())) {
-                            searchPersons.add(person);
-                        }
-                    }
-                } else {
-                    searchPersons.addAll(persons);
-                    searchMovies.addAll(movies);
-                }
-                results.setAdapter(new SearchResultsAdapter(searchMovies, searchPersons));*/
                 return false;
             }
 
@@ -85,10 +73,20 @@ public class SearchMoviesFragment extends Fragment {
                     searchMovies.addAll(movies);
                 }
                 results.setAdapter(new SearchResultsAdapter(searchMovies, searchPersons));
+                Collections.shuffle(movies);
+                Collections.shuffle(persons);
                 return false;
             }
         });
 
-        return view;
+        this.view = view;
+        return this.view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BottomNavigationView bottomNavigationView = MainScreenActivity.context.findViewById(R.id.bottom_navigation);
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
     }
 }

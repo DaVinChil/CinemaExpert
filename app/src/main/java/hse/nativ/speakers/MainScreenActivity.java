@@ -2,15 +2,9 @@ package hse.nativ.speakers;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
-
-import androidx.appcompat.widget.Toolbar;
-
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -38,19 +32,20 @@ public class MainScreenActivity extends AppCompatActivity {
     private void setBottomNavigationView() {
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnItemSelectedListener(item -> {
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            if (item.isChecked()) return true;
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             if (item.getItemId() == R.id.profile) {
+                if (item.isChecked()) return true;
                 if (profileFragment == null) {
                     profileFragment = new ProfileFragment();
                 }
                 fragmentTransaction
                         .replace(R.id.container, profileFragment)
-                        .addToBackStack(null)
+                        .addToBackStack("profileFragment")
                         .commit();
             }
             else if (item.getItemId() == R.id.home) {
-                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction
                         .replace(R.id.container, moviesContainerFragment)
                         .commit();
@@ -59,9 +54,10 @@ public class MainScreenActivity extends AppCompatActivity {
                 if (searchFragment == null) {
                     searchFragment = new SearchMoviesFragment();
                 }
+                fragmentManager.popBackStack("searchFragment", 0);
                 fragmentTransaction
                         .replace(R.id.container, searchFragment)
-                        .addToBackStack(null)
+                        .addToBackStack("searchFragment")
                         .commit();
             }
             return true;
