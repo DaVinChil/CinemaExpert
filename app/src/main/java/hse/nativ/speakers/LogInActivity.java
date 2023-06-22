@@ -104,13 +104,13 @@ public class LogInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(LogInActivity.this, "Welcome, " + task.getResult().getUser().getDisplayName(),
-                                    Toast.LENGTH_SHORT);
+                                    Toast.LENGTH_SHORT).show();
                             Intent mainScreen = new Intent(LogInActivity.this, MainScreenActivity.class);
                             startActivity(mainScreen);
                             finish();
                         } else {
                             Toast.makeText(LogInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT);
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
