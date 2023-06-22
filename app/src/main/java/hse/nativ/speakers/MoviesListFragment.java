@@ -1,8 +1,6 @@
 package hse.nativ.speakers;
 
-import android.graphics.Rect;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,14 +15,11 @@ public class MoviesListFragment extends Fragment {
 
     private String moviesCategory;
     private int count;
-    private AppCompatActivity context;
-
     private TextView getAllMoviesButton;
     private TextView moviesCategoryText;
     private RecyclerView moviesRecycler;
 
     public MoviesListFragment(String moviesCategory) {
-        this.context = MainScreenActivity.context;
         this.moviesCategory = moviesCategory;
     }
 
@@ -65,12 +60,11 @@ public class MoviesListFragment extends Fragment {
 
     private void setButton() {
         getAllMoviesButton.setOnClickListener(view -> {
-            FragmentTransaction fragmentTransaction = context.getSupportFragmentManager().beginTransaction();
-            MoviesByCategoryFragment movieList = new MoviesByCategoryFragment(moviesCategoryText.getText().toString(),
-                    moviesRecycler.getAdapter());
-            fragmentTransaction.replace(R.id.container, movieList);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            FragmentTransaction fragmentTransaction = MainScreenActivity.context.getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.container, new MoviesByCategoryFragment(moviesCategoryText.getText().toString(),
+                    moviesRecycler.getAdapter()))
+                    .addToBackStack(null)
+                    .commit();
         });
     }
 }

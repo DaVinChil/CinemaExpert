@@ -200,7 +200,7 @@ public class DataInflater {
         });
     }
 
-    public static void inflateAllCollections(RecyclerView recyclerView, List<Person> persons, List<Movie> movies) {
+    public static void inflateAllCollections(List<Person> persons, List<Movie> movies) {
         executorService.submit(() -> {
             AtomicBoolean personsAdded = new AtomicBoolean(false);
             AtomicBoolean moviesAdded = new AtomicBoolean(false);
@@ -230,10 +230,8 @@ public class DataInflater {
                            }
                        }
                    });
-           while (!(personsAdded.get() && moviesAdded.get()));
            Collections.shuffle(movies);
            Collections.shuffle(persons);
-           recyclerView.setAdapter(new SearchResultsAdapter(movies, persons));
         });
     }
 }
