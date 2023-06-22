@@ -68,9 +68,6 @@ public class LogInActivity extends AppCompatActivity {
             if(userEmail == null || userPass == null){ return; }
 
             performLogIn(userEmail, userPass);
-            Intent mainScreen = new Intent(this, MainScreenActivity.class);
-            startActivity(mainScreen);
-            finish();
         });
     }
 
@@ -108,7 +105,9 @@ public class LogInActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(LogInActivity.this, "Welcome, " + task.getResult().getUser().getDisplayName(),
                                     Toast.LENGTH_SHORT);
-                            // TODO: SEND INTENT TO MAIN PAGE
+                            Intent mainScreen = new Intent(LogInActivity.this, MainScreenActivity.class);
+                            startActivity(mainScreen);
+                            finish();
                         } else {
                             Toast.makeText(LogInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT);

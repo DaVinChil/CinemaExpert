@@ -73,17 +73,20 @@ public class SearchMoviesFragment extends Fragment {
                     for (Movie movie : movies) {
                         if (movie.getTitle().toLowerCase().contains(newText.toLowerCase())) {
                             searchMovies.add(movie);
+//                            System.out.println(searchMovies.size());
                         }
                     }
                     for (Person person : persons) {
                         if (person.getFullName().toLowerCase().contains(newText.toLowerCase())) {
                             searchPersons.add(person);
+                            System.out.println(searchPersons.size());
                         }
                     }
                 } else {
                     searchPersons.addAll(persons);
                     searchMovies.addAll(movies);
                 }
+                System.out.println(searchPersons.size());
                 results.setAdapter(new SearchResultsAdapter(searchMovies, searchPersons));
                 return false;
             }
