@@ -65,7 +65,11 @@ public class PersonDetailsFragment extends Fragment {
             }
         } else {
             lifeDate.setText(birthDateMothName);
-            yearAndHeight.setText(Period.between(birthLocalDate, LocalDate.now()).getYears() + " years " + " · " + height + " cm");
+            if (height < 1) {
+                yearAndHeight.setText(Period.between(birthLocalDate, LocalDate.now()).getYears() + " years ");
+            } else {
+                yearAndHeight.setText(Period.between(birthLocalDate, LocalDate.now()).getYears() + " years " + " · " + height + " cm");
+            }
         }
     }
 }
