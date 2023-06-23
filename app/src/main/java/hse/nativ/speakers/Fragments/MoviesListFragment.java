@@ -1,5 +1,5 @@
-package hse.nativ.speakers;
-
+package hse.nativ.speakers.Fragments;
+import hse.nativ.speakers.HelpClasses.CustomizeHelper;
 import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import hse.nativ.speakers.DatabaseClasses.DataInflater;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.R;
 
 public class MoviesListFragment extends Fragment {
 

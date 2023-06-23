@@ -1,4 +1,4 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.Fragments;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -14,12 +14,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.load.engine.Resource;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import hse.nativ.speakers.HelpClasses.CustomizeHelper;
+import hse.nativ.speakers.DatabaseClasses.DataInflater;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.DatabaseClasses.Movie;
+import hse.nativ.speakers.DatabaseClasses.Person;
+import hse.nativ.speakers.R;
+import hse.nativ.speakers.RecyclerAdapters.SearchResultsAdapter;
 
 public class SearchMoviesFragment extends Fragment {
     private ConstraintLayout view;
@@ -61,20 +68,17 @@ public class SearchMoviesFragment extends Fragment {
                     for (Movie movie : movies) {
                         if (movie.getTitle().toLowerCase().contains(newText.toLowerCase())) {
                             searchMovies.add(movie);
-//                            System.out.println(searchMovies.size());
                         }
                     }
                     for (Person person : persons) {
                         if (person.getFullName().toLowerCase().contains(newText.toLowerCase())) {
                             searchPersons.add(person);
-                            System.out.println(searchPersons.size());
                         }
                     }
                 } else {
                     searchPersons.addAll(persons);
                     searchMovies.addAll(movies);
                 }
-                System.out.println(searchPersons.size());
                 results.setAdapter(new SearchResultsAdapter(searchMovies, searchPersons));
                 Collections.shuffle(movies);
                 Collections.shuffle(persons);

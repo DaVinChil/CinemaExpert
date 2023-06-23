@@ -1,4 +1,4 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.DatabaseClasses;
 
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -14,6 +14,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import hse.nativ.speakers.DatabaseClasses.Movie;
+import hse.nativ.speakers.DatabaseClasses.Person;
+import hse.nativ.speakers.RecyclerAdapters.MoviesAdapter;
+import hse.nativ.speakers.RecyclerAdapters.PersonsAdapter;
 
 
 public class DataInflater {

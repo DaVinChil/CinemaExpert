@@ -1,13 +1,11 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.Fragments;
 
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +14,18 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import hse.nativ.speakers.HelpClasses.CustomizeHelper;
+import hse.nativ.speakers.DatabaseClasses.DataInflater;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.DatabaseClasses.Movie;
+import hse.nativ.speakers.R;
 
 public class MovieDetailsFragment extends Fragment {
 
     private final Movie movie;
 
-    MovieDetailsFragment(Movie movie) {this.movie = movie;}
+    public MovieDetailsFragment(Movie movie) {this.movie = movie;}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

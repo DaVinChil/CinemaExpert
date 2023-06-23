@@ -1,4 +1,4 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import hse.nativ.speakers.Activities.LogInActivity;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.R;
 
 public class ProfileFragment extends Fragment {
     private ConstraintLayout view;

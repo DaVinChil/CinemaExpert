@@ -1,14 +1,12 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.HelpClasses;
 
-import android.content.Intent;
 import android.graphics.Rect;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.time.LocalDate;
 import java.time.Month;
+import hse.nativ.speakers.R;
 
 public class CustomizeHelper {
     public static void setGradeBackground(TextView movieGrade, String grade) {
@@ -48,7 +46,7 @@ public class CustomizeHelper {
         return result;
     }
 
-    static class EdgeDecorator extends RecyclerView.ItemDecoration {
+    public static class EdgeDecorator extends RecyclerView.ItemDecoration {
 
         private final int edgePadding;
 
@@ -75,7 +73,7 @@ public class CustomizeHelper {
         }
     }
 
-    static class SearchDecorator extends RecyclerView.ItemDecoration {
+    public static class SearchDecorator extends RecyclerView.ItemDecoration {
 
         private final int edgePadding;
 

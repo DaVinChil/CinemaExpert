@@ -1,4 +1,4 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.RecyclerAdapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,6 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
 import java.util.Map;
+
+import hse.nativ.speakers.DatabaseClasses.Person;
+import hse.nativ.speakers.Fragments.PersonDetailsFragment;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.R;
 
 public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHolder> {
 

@@ -1,4 +1,4 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.DatabaseClasses;
 
 public class ImageDatabase {
     private long height;

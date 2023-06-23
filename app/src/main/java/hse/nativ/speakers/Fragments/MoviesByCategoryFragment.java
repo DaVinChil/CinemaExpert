@@ -1,4 +1,4 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.Fragments;
 
 import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.R;
 
 public class MoviesByCategoryFragment extends Fragment {
 

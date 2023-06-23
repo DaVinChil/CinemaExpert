@@ -1,22 +1,20 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.RecyclerAdapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import hse.nativ.speakers.HelpClasses.CustomizeHelper;
+import hse.nativ.speakers.DatabaseClasses.Movie;
+import hse.nativ.speakers.Fragments.MovieDetailsFragment;
+import hse.nativ.speakers.DatabaseClasses.ImageDatabase;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.R;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 

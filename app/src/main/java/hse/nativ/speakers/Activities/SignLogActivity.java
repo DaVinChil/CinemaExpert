@@ -1,24 +1,21 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextPaint;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import hse.nativ.speakers.R;
 
 // TODO: Delete 33 line, when home page would be created
 

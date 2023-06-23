@@ -1,4 +1,4 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.RecyclerAdapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,13 +7,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import java.time.LocalDate;
+
 import java.util.List;
+
+import hse.nativ.speakers.DatabaseClasses.Movie;
+import hse.nativ.speakers.DatabaseClasses.Person;
+import hse.nativ.speakers.Fragments.MovieDetailsFragment;
+import hse.nativ.speakers.Fragments.PersonDetailsFragment;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.R;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.ViewHolder> {
 

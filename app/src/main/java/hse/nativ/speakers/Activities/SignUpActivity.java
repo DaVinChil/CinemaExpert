@@ -1,23 +1,15 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.FirstPartyScopes;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
@@ -26,11 +18,10 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
+import hse.nativ.speakers.FireStoreTools;
+import hse.nativ.speakers.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -47,8 +38,8 @@ public class SignUpActivity extends AppCompatActivity {
     private ImageView passEye;
     private ImageView confPassEye;
 
-    private boolean passHiden = true;
-    private boolean confPassHiden = true;
+    private boolean passHidden = true;
+    private boolean confPassHidden = true;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
@@ -90,11 +81,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     protected void setPassEye() {
         passEye.setOnClickListener(v -> {
-            if (passHiden) {
-                passHiden = false;
+            if (passHidden) {
+                passHidden = false;
                 showPassword(passEye, passInput);
             } else {
-                passHiden = true;
+                passHidden = true;
                 hidePassword(passEye, passInput);
             }
         });
@@ -102,11 +93,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     protected void setConfPassEye() {
         confPassEye.setOnClickListener(v -> {
-            if (confPassHiden) {
-                confPassHiden = false;
+            if (confPassHidden) {
+                confPassHidden = false;
                 showPassword(confPassEye, confirmPassInput);
             } else {
-                confPassHiden = true;
+                confPassHidden = true;
                 hidePassword(confPassEye, confirmPassInput);
             }
         });
@@ -219,22 +210,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     protected void setSignUpBtn() {
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Handler().post(() -> {
-                    String userName = getUserNameAndVerify();
-                    String userEmail = getEmailAndVerify();
-                    String pass = getPassAndVerifyAndCompare();
-                    if (userName == null || userEmail == null || pass == null) { return; }
+        signUpBtn.setOnClickListener(view -> new Handler().post(() -> {
+            String userName = getUserNameAndVerify();
+            String userEmail = getEmailAndVerify();
+            String pass = getPassAndVerifyAndCompare();
+            if (userName == null || userEmail == null || pass == null) { return; }
 
-                    createAccount(userEmail, pass, userName);
-                    Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
-                    startActivity(intent);
-                    finish();
-                });
-            }
-        });
+            createAccount(userEmail, pass, userName);
+            Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
+            startActivity(intent);
+            finish();
+        }));
     }
 
     protected void createAccount(String userEmail, String pass, String userName){

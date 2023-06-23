@@ -1,7 +1,7 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.Fragments;
 
 import android.os.Bundle;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,10 +16,16 @@ import com.bumptech.glide.Glide;
 import java.time.LocalDate;
 import java.time.Period;
 
+import hse.nativ.speakers.HelpClasses.CustomizeHelper;
+import hse.nativ.speakers.DatabaseClasses.DataInflater;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.DatabaseClasses.Person;
+import hse.nativ.speakers.R;
+
 public class PersonDetailsFragment extends Fragment {
 
     private final Person person;
-    PersonDetailsFragment(Person person) {this.person = person;}
+    public PersonDetailsFragment(Person person) {this.person = person;}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

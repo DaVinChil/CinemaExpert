@@ -1,19 +1,18 @@
-package hse.nativ.speakers;
+package hse.nativ.speakers.Fragments;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
+import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.R;
 
 public class MoviesContainerFragment extends Fragment {
     private ScrollView view;

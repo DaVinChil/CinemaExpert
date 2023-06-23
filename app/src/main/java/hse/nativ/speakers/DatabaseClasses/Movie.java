@@ -1,6 +1,4 @@
-package hse.nativ.speakers;
-
-import com.google.firebase.firestore.FirebaseFirestore;
+package hse.nativ.speakers.DatabaseClasses;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SignLogActivity">
+    tools:context=".Activities.SignLogActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
