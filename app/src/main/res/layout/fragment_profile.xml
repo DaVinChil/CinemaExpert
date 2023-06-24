@@ -38,6 +38,9 @@
         android:textColor="@color/white"
         android:fontFamily="@font/kanit_regular"
         app:layout_constraintStart_toEndOf="@+id/profile_fragment_photo"
-        app:layout_constraintTop_toTopOf="@+id/profile_fragment_photo" />
+        app:layout_constraintTop_toTopOf="@+id/profile_fragment_photo"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:inputType="text"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package hse.nativ.speakers;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -73,6 +75,8 @@ public class CurrentUser {
     public static void setUserName(String userName) {
         userSettings.setUserName(userName);
         database.update("userName", userName);
+        FirebaseAuth.getInstance()
+                .getCurrentUser().updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(userName).build());
     }
     public static String getUserName() {return userSettings.getUserName();}
 }
