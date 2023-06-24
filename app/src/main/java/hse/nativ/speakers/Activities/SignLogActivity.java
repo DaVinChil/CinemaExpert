@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import hse.nativ.speakers.CurrentUser;
 import hse.nativ.speakers.R;
 
 // TODO: Delete 33 line, when home page would be created
@@ -44,6 +45,8 @@ public class SignLogActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null){
+            CurrentUser.setUserEmail(user.getEmail());
+            CurrentUser.connectToDatabase();
             Toast.makeText(this, "Welcome, " + user.getDisplayName() + ".", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignLogActivity.this, MainScreenActivity.class);
             startActivity(intent);

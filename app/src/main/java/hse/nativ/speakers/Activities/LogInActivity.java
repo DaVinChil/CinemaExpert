@@ -17,12 +17,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
+import hse.nativ.speakers.CurrentUser;
 import hse.nativ.speakers.R;
 
 public class LogInActivity extends AppCompatActivity {
 
-    private boolean passHiden = true;
+    private boolean passHidden = true;
     private int passCursorPos = 0;
     private EditText passInput;
     private EditText emailInput;
@@ -97,19 +97,19 @@ public class LogInActivity extends AppCompatActivity {
 
     protected void performLogIn(String userEmail, String userPass){
         mAuth.signInWithEmailAndPassword(userEmail, userPass)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(LogInActivity.this, "Welcome, " + task.getResult().getUser().getDisplayName(),
-                                    Toast.LENGTH_SHORT).show();
-                            Intent mainScreen = new Intent(LogInActivity.this, MainScreenActivity.class);
-                            startActivity(mainScreen);
-                            finish();
-                        } else {
-                            Toast.makeText(LogInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        Toast.makeText(LogInActivity.this, "Welcome, " + task.getResult().getUser().getDisplayName(),
+                                Toast.LENGTH_SHORT).show();
+                        CurrentUser.setUserEmail(userEmail);
+                        CurrentUser.setUserPassword(userPass);
+                        CurrentUser.connectToDatabase();
+                        Intent mainScreen = new Intent(LogInActivity.this, MainScreenActivity.class);
+                        startActivity(mainScreen);
+                        finish();
+                    } else {
+                        Toast.makeText(LogInActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -132,14 +132,14 @@ public class LogInActivity extends AppCompatActivity {
 
     protected void setPasswordEye() {
         passEye.setOnClickListener((v) -> {
-            if (passHiden) {
-                passHiden = false;
+            if (passHidden) {
+                passHidden = false;
                 passCursorPos = passInput.getText().length();
                 passEye.setImageResource(R.drawable.password_eye_crossed);
                 passInput.setTransformationMethod(null);
                 passInput.setSelection(passCursorPos);
             } else {
-                passHiden = true;
+                passHidden = true;
                 passCursorPos = passInput.getText().length();
                 passEye.setImageResource(R.drawable.password_eye);
                 passInput.setTransformationMethod(new PasswordTransformationMethod());

@@ -11,11 +11,33 @@
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="256dp"
         android:backgroundTint="@color/orange"
         android:text="Logout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profile_fragment_photo"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/profile_standart_photo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/profile_fragment_name"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/kanit_regular"
+        app:layout_constraintStart_toEndOf="@+id/profile_fragment_photo"
+        app:layout_constraintTop_toTopOf="@+id/profile_fragment_photo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
