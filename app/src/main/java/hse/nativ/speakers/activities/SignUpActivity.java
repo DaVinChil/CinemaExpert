@@ -1,4 +1,4 @@
-package hse.nativ.speakers.Activities;
+package hse.nativ.speakers.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import hse.nativ.speakers.CurrentUser;
 import hse.nativ.speakers.FireStoreTools;
 import hse.nativ.speakers.R;
 
@@ -217,7 +218,7 @@ public class SignUpActivity extends AppCompatActivity {
             if (userName == null || userEmail == null || pass == null) { return; }
 
             createAccount(userEmail, pass, userName);
-            Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, MainScreenActivity.class);
             startActivity(intent);
             finish();
         }));
@@ -226,11 +227,13 @@ public class SignUpActivity extends AppCompatActivity {
     protected void createAccount(String userEmail, String pass, String userName){
         mAuth.createUserWithEmailAndPassword(userEmail, pass)
                 .addOnCompleteListener(task -> {
+                    CurrentUser.setUserEmail(userEmail);
+                    CurrentUser.setUserName(userName);
+                    CurrentUser.connectToDatabase();
+                    CurrentUser.updateUserSettings();
                     onCompleteCreatingAccount(task, userName);
                 })
-                .addOnFailureListener(e -> {
-                    onFailureCreatingAccount(e);
-                });
+                .addOnFailureListener(e -> onFailureCreatingAccount(e));
     }
 
     protected void onCompleteCreatingAccount(Task<AuthResult> task, String userName){

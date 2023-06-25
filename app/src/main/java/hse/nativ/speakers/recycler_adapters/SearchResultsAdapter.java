@@ -1,4 +1,4 @@
-package hse.nativ.speakers.RecyclerAdapters;
+package hse.nativ.speakers.recycler_adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -14,11 +14,11 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import hse.nativ.speakers.DatabaseClasses.Movie;
-import hse.nativ.speakers.DatabaseClasses.Person;
-import hse.nativ.speakers.Fragments.MovieDetailsFragment;
-import hse.nativ.speakers.Fragments.PersonDetailsFragment;
-import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.database_classes.Movie;
+import hse.nativ.speakers.database_classes.Person;
+import hse.nativ.speakers.fragments.MovieDetailsFragment;
+import hse.nativ.speakers.fragments.PersonDetailsFragment;
+import hse.nativ.speakers.activities.MainScreenActivity;
 import hse.nativ.speakers.R;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.ViewHolder> {

@@ -1,4 +1,4 @@
-package hse.nativ.speakers.Fragments;
+package hse.nativ.speakers.fragments;
 
 import android.os.Bundle;
 
@@ -11,7 +11,7 @@ import android.widget.ScrollView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import hse.nativ.speakers.Activities.MainScreenActivity;
+import hse.nativ.speakers.activities.MainScreenActivity;
 import hse.nativ.speakers.R;
 
 public class MoviesContainerFragment extends Fragment {

@@ -1,6 +1,5 @@
-package hse.nativ.speakers.Activities;
+package hse.nativ.speakers.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,11 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import hse.nativ.speakers.CurrentUser;
 import hse.nativ.speakers.R;
@@ -102,8 +97,8 @@ public class LogInActivity extends AppCompatActivity {
                         Toast.makeText(LogInActivity.this, "Welcome, " + task.getResult().getUser().getDisplayName(),
                                 Toast.LENGTH_SHORT).show();
                         CurrentUser.setUserEmail(userEmail);
-                        CurrentUser.setUserPassword(userPass);
                         CurrentUser.connectToDatabase();
+                        CurrentUser.uploadUserSettings();
                         Intent mainScreen = new Intent(LogInActivity.this, MainScreenActivity.class);
                         startActivity(mainScreen);
                         finish();

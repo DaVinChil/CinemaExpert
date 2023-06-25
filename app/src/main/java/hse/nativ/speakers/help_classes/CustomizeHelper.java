@@ -1,4 +1,4 @@
-package hse.nativ.speakers.HelpClasses;
+package hse.nativ.speakers.help_classes;
 
 import android.graphics.Rect;
 import android.view.View;

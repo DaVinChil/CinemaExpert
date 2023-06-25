@@ -1,4 +1,4 @@
-package hse.nativ.speakers.Fragments;
+package hse.nativ.speakers.fragments;
 
 import android.os.Bundle;
 
@@ -16,10 +16,10 @@ import com.bumptech.glide.Glide;
 import java.time.LocalDate;
 import java.time.Period;
 
-import hse.nativ.speakers.HelpClasses.CustomizeHelper;
-import hse.nativ.speakers.DatabaseClasses.DataInflater;
-import hse.nativ.speakers.Activities.MainScreenActivity;
-import hse.nativ.speakers.DatabaseClasses.Person;
+import hse.nativ.speakers.help_classes.CustomizeHelper;
+import hse.nativ.speakers.database_classes.DataInflater;
+import hse.nativ.speakers.activities.MainScreenActivity;
+import hse.nativ.speakers.database_classes.Person;
 import hse.nativ.speakers.R;
 
 public class PersonDetailsFragment extends Fragment {

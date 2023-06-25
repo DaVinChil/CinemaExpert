@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:scrollbars="none"
     android:orientation="vertical"
-    tools:context=".Fragments.MoviesContainerFragment">
+    tools:context=".fragments.MoviesContainerFragment">
 
     <LinearLayout
         android:id="@+id/movies_container_linear_layout"

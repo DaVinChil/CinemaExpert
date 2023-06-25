@@ -1,4 +1,4 @@
-package hse.nativ.speakers.Fragments;
+package hse.nativ.speakers.fragments;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,13 +20,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import hse.nativ.speakers.HelpClasses.CustomizeHelper;
-import hse.nativ.speakers.DatabaseClasses.DataInflater;
-import hse.nativ.speakers.Activities.MainScreenActivity;
-import hse.nativ.speakers.DatabaseClasses.Movie;
-import hse.nativ.speakers.DatabaseClasses.Person;
+import hse.nativ.speakers.help_classes.CustomizeHelper;
+import hse.nativ.speakers.database_classes.DataInflater;
+import hse.nativ.speakers.activities.MainScreenActivity;
+import hse.nativ.speakers.database_classes.Movie;
+import hse.nativ.speakers.database_classes.Person;
 import hse.nativ.speakers.R;
-import hse.nativ.speakers.RecyclerAdapters.SearchResultsAdapter;
+import hse.nativ.speakers.recycler_adapters.SearchResultsAdapter;
 
 public class SearchMoviesFragment extends Fragment {
     private ConstraintLayout view;

@@ -1,10 +1,14 @@
-package hse.nativ.speakers.DatabaseClasses;
+package hse.nativ.speakers.database_classes;
 
 public class UserSettings {
     private String photoUri;
     private String firstName;
     private String lastName;
     private String userName;
+    private String userEmail;
+
+    public void setUserEmail(String userEmail) {this.userEmail = userEmail;}
+    public String getUserEmail() {return userEmail;}
 
     public void setPhotoUri(String photoUri) {this.photoUri = photoUri;}
     public String getPhotoUri() {return photoUri;}

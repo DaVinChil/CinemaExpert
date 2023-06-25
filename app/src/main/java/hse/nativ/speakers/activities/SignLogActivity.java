@@ -1,7 +1,6 @@
-package hse.nativ.speakers.Activities;
+package hse.nativ.speakers.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -10,11 +9,9 @@ import android.os.Bundle;
 import android.text.TextPaint;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import hse.nativ.speakers.CurrentUser;
 import hse.nativ.speakers.R;
 
@@ -44,9 +41,10 @@ public class SignLogActivity extends AppCompatActivity {
     protected void checkForAlreadyLogIn(){
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user != null){
+        if(user != null) {
             CurrentUser.setUserEmail(user.getEmail());
             CurrentUser.connectToDatabase();
+            CurrentUser.uploadUserSettings();
             Toast.makeText(this, "Welcome, " + user.getDisplayName() + ".", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignLogActivity.this, MainScreenActivity.class);
             startActivity(intent);

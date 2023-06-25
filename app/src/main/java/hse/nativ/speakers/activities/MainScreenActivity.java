@@ -1,4 +1,4 @@
-package hse.nativ.speakers.Activities;
+package hse.nativ.speakers.activities;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import hse.nativ.speakers.Fragments.MoviesContainerFragment;
-import hse.nativ.speakers.Fragments.ProfileFragment;
-import hse.nativ.speakers.Fragments.SearchMoviesFragment;
+import hse.nativ.speakers.fragments.MoviesContainerFragment;
+import hse.nativ.speakers.fragments.ProfileFragment;
+import hse.nativ.speakers.fragments.SearchMoviesFragment;
 import hse.nativ.speakers.R;
 
 

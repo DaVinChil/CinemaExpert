@@ -1,4 +1,4 @@
-package hse.nativ.speakers.Fragments;
+package hse.nativ.speakers.fragments;
 
 import android.os.Bundle;
 
@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import hse.nativ.speakers.HelpClasses.CustomizeHelper;
-import hse.nativ.speakers.DatabaseClasses.DataInflater;
-import hse.nativ.speakers.Activities.MainScreenActivity;
-import hse.nativ.speakers.DatabaseClasses.Movie;
+import hse.nativ.speakers.help_classes.CustomizeHelper;
+import hse.nativ.speakers.database_classes.DataInflater;
+import hse.nativ.speakers.activities.MainScreenActivity;
+import hse.nativ.speakers.database_classes.Movie;
 import hse.nativ.speakers.R;
 
 public class MovieDetailsFragment extends Fragment {
